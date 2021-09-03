@@ -1,0 +1,14 @@
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Release\FourInARowWindows.exe.config
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Release\FourInARowWindows.exe
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Release\FourInARowWindows.pdb
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Release\GameEngine.dll
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Release\GameEngine.pdb
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Release\GameEngine.dll.config
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Release\FourInARowWindows.csproj.AssemblyReference.cache
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Release\FourInARowWindows.Properties.Resources.resources
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Release\FourInARowWindows.SettingsMenu.resources
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Release\FourInARowWindows.csproj.GenerateResource.cache
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Release\FourInARowWindows.csproj.CoreCompileInputs.cache
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Release\FourInARowWindows.csproj.CopyComplete
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Release\FourInARowWindows.exe
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Release\FourInARowWindows.pdb

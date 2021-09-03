@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -11,23 +12,23 @@ using GameEngine;
 
 namespace FourInARowWindows
 {
-     public partial class SettingsMenu : Form
-     {
-         private readonly IFourInARow engine;
-         private readonly GameBoard gameBoard;
-          public SettingsMenu()
-          {
-               //logical configuring - might want to put into separate method
-               engine = new GameEngineLogic();
-               InitializeComponent();
-          }
+    public partial class SettingsMenu : Form
+    {
+        private readonly IFourInARow engine;
+        private readonly GameBoard gameBoard;
+        public SettingsMenu()
+        {
+            //logical configuring - might want to put into separate method
+            engine = new GameEngineLogic();
+            InitializeComponent();
+        }
 
-          public SettingsMenu(IFourInARow i_Engine)
-          {
-              engine = i_Engine;
-          }
+        public SettingsMenu(IFourInARow i_Engine)
+        {
+            engine = i_Engine;
+        }
 
-          private void label1_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
@@ -79,29 +80,58 @@ namespace FourInARowWindows
             {
                 Console.WriteLine(item.ToString());
             }
-            //Add data validation!
-
-            engine.InitializePlayerSkeleton();
-            engine.CreateGameBoard(comboBoxRows.SelectedItem.ToString(), comboBoxCols.SelectedItem.ToString());
-            string userOpponentChoice = this.checkBoxPlayerTwo.Checked ? isAiOpponent : isHumanOpponent; 
-            engine.InitializePlayer2AndOpponent(userOpponentChoice);
-            this.Close();
-            GameForm gameForm = new GameForm(engine);
 
 
+            //   validateSettingsForm();
+            bool errorAtForm = false;
+            StringBuilder systemOutPutToUserBuilder = new StringBuilder();
+            if (comboBoxRows.SelectedItem == null)
+            {
+                comboBoxRows.BackColor = Color.IndianRed;
+                systemOutPutToUserBuilder.Append("Please make sure you chose rows for the game table.");
+                errorAtForm = true;
+            }
+            else if (comboBoxCols.SelectedItem == null)
+            {
+                comboBoxCols.BackColor = Color.IndianRed;
+                systemOutPutToUserBuilder.Append("Please make sure you chose columns for the game table.");
+                errorAtForm = true;
+            }
+            else
+            {
+                //replaces the exception
+                engine.InitializePlayerSkeleton();
+                engine.CreateGameBoard(comboBoxRows.SelectedItem.ToString(), comboBoxCols.SelectedItem.ToString());
+                string userOpponentChoice = this.checkBoxPlayerTwo.Checked ? isAiOpponent : isHumanOpponent;
+                engine.InitializePlayer2AndOpponent(userOpponentChoice);
+                this.Close();
+                openGameForm();
+            }
+
+            if (errorAtForm == true)
+            {
+                MessageBox.Show(systemOutPutToUserBuilder.ToString());
+            }
+        }
+
+        
+
+        private void openGameForm()
+        {
+            throw new NotImplementedException();
         }
 
         private const string isAiOpponent = "1";
         private const string isHumanOpponent = "2";
     }
 
-     internal class GameForm
-     {
-         private readonly GameEngineLogic EngineLogic;
+    internal class GameForm
+    {
+        private readonly GameEngineLogic EngineLogic;
 
-         public GameForm(IFourInARow engine)
-         {
+        public GameForm(IFourInARow engine)
+        {
 
-         }
-     }
+        }
+    }
 }

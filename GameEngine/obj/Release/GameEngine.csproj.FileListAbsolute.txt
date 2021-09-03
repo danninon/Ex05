@@ -1,0 +1,6 @@
+C:\Users\Z490\Source\Repos\Ex05_With_Git\GameEngine\bin\Release\GameEngine.dll.config
+C:\Users\Z490\Source\Repos\Ex05_With_Git\GameEngine\bin\Release\GameEngine.dll
+C:\Users\Z490\Source\Repos\Ex05_With_Git\GameEngine\bin\Release\GameEngine.pdb
+C:\Users\Z490\Source\Repos\Ex05_With_Git\GameEngine\obj\Release\GameEngine.csproj.CoreCompileInputs.cache
+C:\Users\Z490\Source\Repos\Ex05_With_Git\GameEngine\obj\Release\GameEngine.dll
+C:\Users\Z490\Source\Repos\Ex05_With_Git\GameEngine\obj\Release\GameEngine.pdb

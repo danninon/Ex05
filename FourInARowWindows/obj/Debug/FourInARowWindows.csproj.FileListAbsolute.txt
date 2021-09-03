@@ -12,3 +12,17 @@ C:\Users\Z490\Downloads\Ex05\Ex05\FourInARowWindows\bin\Debug\GameEngine.dll
 C:\Users\Z490\Downloads\Ex05\Ex05\FourInARowWindows\bin\Debug\GameEngine.pdb
 C:\Users\Z490\Downloads\Ex05\Ex05\FourInARowWindows\bin\Debug\GameEngine.dll.config
 C:\Users\Z490\Downloads\Ex05\Ex05\FourInARowWindows\obj\Debug\FourInARowWindows.csproj.CopyComplete
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Debug\FourInARowWindows.exe.config
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Debug\FourInARowWindows.exe
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Debug\FourInARowWindows.pdb
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Debug\GameEngine.dll
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Debug\GameEngine.pdb
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\bin\Debug\GameEngine.dll.config
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.csproj.AssemblyReference.cache
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.Properties.Resources.resources
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.SettingsMenu.resources
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.csproj.GenerateResource.cache
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.csproj.CoreCompileInputs.cache
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.csproj.CopyComplete
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.exe
+C:\Users\Z490\Source\Repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.pdb
