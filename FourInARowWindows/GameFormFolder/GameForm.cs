@@ -25,7 +25,9 @@ namespace FourInARowWindows
           private void generatePlayersNames()
           {
                label1.Text = r_engine.GetPlayer1().Name;
+               label1.Text += ": ";
                label2.Text = r_engine.GetPlayer2().Name;
+               label2.Text += ": ";
           }
      }
 }
