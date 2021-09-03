@@ -32,6 +32,8 @@ namespace FourInARowWindows
                this.label1 = new System.Windows.Forms.Label();
                this.label2 = new System.Windows.Forms.Label();
                this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+               this.button1 = new System.Windows.Forms.Button();
+               this.flowLayoutPanel1.SuspendLayout();
                this.SuspendLayout();
                // 
                // label1
@@ -57,10 +59,21 @@ namespace FourInARowWindows
                this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-               this.flowLayoutPanel1.Location = new System.Drawing.Point(284, 145);
+               this.flowLayoutPanel1.Controls.Add(this.button1);
+               this.flowLayoutPanel1.Location = new System.Drawing.Point(284, 144);
                this.flowLayoutPanel1.Name = "flowLayoutPanel1";
                this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 100);
                this.flowLayoutPanel1.TabIndex = 2;
+               // 
+               // button1
+               // 
+               this.button1.Location = new System.Drawing.Point(3, 3);
+               this.button1.Name = "button1";
+               this.button1.Size = new System.Drawing.Size(75, 23);
+               this.button1.TabIndex = 0;
+               this.button1.Text = "1";
+               this.button1.UseVisualStyleBackColor = true;
+               this.button1.Click += new System.EventHandler(this.OnActionClicked);
                // 
                // GameForm
                // 
@@ -74,6 +87,7 @@ namespace FourInARowWindows
                this.MaximizeBox = false;
                this.Name = "GameForm";
                this.Text = "4 in a Raw !!";
+               this.flowLayoutPanel1.ResumeLayout(false);
                this.ResumeLayout(false);
                this.PerformLayout();
 
@@ -84,5 +98,6 @@ namespace FourInARowWindows
           private System.Windows.Forms.Label label1;
           private System.Windows.Forms.Label label2;
           private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+          private System.Windows.Forms.Button button1;
      }
 }

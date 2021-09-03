@@ -10,6 +10,9 @@ namespace FourInARowWindows
 {
      public class ActionButton : Button
      {
-
+          public ActionButton(int i_Index)
+          {
+               Text = i_Index.ToString();
+          }
      }
 }

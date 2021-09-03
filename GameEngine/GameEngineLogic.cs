@@ -63,72 +63,39 @@ namespace GameEngine
                return true;
           }
 
-          public eGameStatus CommitTurn(string i_UserColumnInput, out int io_UserChoice)
+          public eGameStatus CommitTurn(string io_UserChoice)
           {
-               //int io_UserChoice;
+               int UserChoice = int.Parse(io_UserChoice);
                byte currentPlayer = 1;
                eGameStatus currentStatus = eGameStatus.ContinuePlayingRound;
 
-               //gets an int value \ throws i_UserColumnInput isn't parseable to int if it isn't int
-               analyzeInputTypeAndReturnProperNumber(i_UserColumnInput, out io_UserChoice);
-
-               //O.K input
-               if (io_UserChoice >= 1
-                    && io_UserChoice <= m_GameBoard.NumOfCols &&
-                    m_GameBoard.GameBoardMatrix[0, io_UserChoice - 1] == (byte)ePlayerValue.NullValue)
+               if (this.isCurrentPlayer1)
                {
-                    if (this.isCurrentPlayer1)
-                    {
-                         m_GameBoard.AddDisk(io_UserChoice, ePlayerValue.Player1);
-                    }
-                    else
-                    {
-                         m_GameBoard.AddDisk(io_UserChoice, ePlayerValue.Player2);
-                         currentPlayer = 2;
-                    }
-
-                    currentStatus = m_GameBoard.CheckGameStatus(currentPlayer);
-                    if (currentStatus == eGameStatus.Win)
-                    {
-                         increaseScoreToPlayer(CurrentPlayer);
-                    }
-                    else
-                    {
-                         SwitchToOtherPlayer();
-                    }
+                    m_GameBoard.AddDisk(UserChoice, ePlayerValue.Player1);
                }
-               else if (io_UserChoice >= 1
-                    && io_UserChoice <= m_GameBoard.NumOfCols)
-               {
-                    throw new Exception(i_UserColumnInput + " column is full, Please choose again.");
-               }
-               //throws if not a valid number
                else
                {
-                    throw new Exception(i_UserColumnInput + " column is out of bound, Please choose again.");
+                    if (Player2.IsAnAi)
+                    {
+                         m_GameBoard.AddDisk(aiIncredibleLogic(), ePlayerValue.Player2);
+                    }
+                    else
+                    {
+                         m_GameBoard.AddDisk(UserChoice, ePlayerValue.Player2);
+                    }
+                    currentPlayer = 2;
                }
 
+               currentStatus = m_GameBoard.CheckGameStatus(currentPlayer);
+               if (currentStatus == eGameStatus.Win)
+               {
+                    increaseScoreToPlayer(CurrentPlayer);
+               }
+               else
+               {
+                    SwitchToOtherPlayer();
+               }
                return currentStatus;
-          }
-
-          private void analyzeInputTypeAndReturnProperNumber(string i_UserColumnInput, out int io_UserChoice)
-          {
-               //checks if human input or computer input
-               //then it's an Ai
-               if (i_UserColumnInput == null)
-               {
-                    //for now just randomizes a number
-                    io_UserChoice = aiIncredibleLogic();
-               }
-               //checks real users input
-               else
-               {
-                    //throws if not a number
-                    if (!(int.TryParse(i_UserColumnInput, out io_UserChoice)))
-                    {
-                         throw new Exception("You've entered: " + i_UserColumnInput + " Which is an illegal input");
-                    }
-               }
           }
 
           private int aiIncredibleLogic()
@@ -142,9 +109,14 @@ namespace GameEngine
                ++o_Player.Score;
           }
 
-          public GameBoard GetGameBoard
+          public GameBoard GameBoard
           {
                get => m_GameBoard;
+          }
+
+          public GameBoard GetGameBoard()
+          {
+               return GameBoard;
           }
 
           private Player m_Player1;
@@ -176,6 +148,11 @@ namespace GameEngine
           {
                get => m_CurrentPlayer;
                set => m_CurrentPlayer = value;
+          }
+
+          public Player GetCurrentPlayer()
+          {
+               return CurrentPlayer;
           }
 
           private Player m_CurrentOpponent;
