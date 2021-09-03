@@ -6,15 +6,14 @@ using System.Windows.Forms;
 
 namespace FourInARowWindows
 {
-     static class Program
+     public class Program
      {
           /// <summary>
           /// The main entry point for the application.
           /// </summary>
           [STAThread]
-          static void Main()
+          public static void Main()
           {
-               //enables SettingsForm which creates and deploys GameForm later on
                Application.EnableVisualStyles();
                Application.SetCompatibleTextRenderingDefault(false);
                Application.Run(new SettingsMenu()); //<--- SettingsMenu

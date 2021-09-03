@@ -8,8 +8,15 @@ namespace GameEngine
 {
      public class Player
      {
+          private string m_name;
           private readonly bool m_IsAnAi;
           private int m_Score;
+
+          public string Name
+          {
+               get => m_name;
+               set => m_name = value;
+          }
 
           public Player(bool i_IsPlayerAnAi)
           {

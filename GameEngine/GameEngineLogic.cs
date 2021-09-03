@@ -13,7 +13,7 @@ namespace GameEngine
           public const string k_AiOpponent = "2";
           public const string k_RealOpponent = "1";
 
-        public enum eGameStatus
+          public enum eGameStatus
           {
                ContinuePlayingRound,
                Tie,
@@ -44,23 +44,22 @@ namespace GameEngine
           }
 
           //assumes no turns have been made into the game yet, a
-          public bool InitializePlayer2AndOpponent(string i_ReadLine)
+          public bool InitializePlayer2AndOpponent(string i_ReadLine, string i_PlayerName)
           {
                if (i_ReadLine == k_AiOpponent)
                {
                     Player2 = new Player(true);
-                    CurrentOpponent = Player2;
                }
                else if (i_ReadLine == k_RealOpponent)
                {
                     Player2 = new Player(false);
-                    CurrentOpponent = Player2;
                }
                else //then error, throw it
                {
                     throw new Exception("You may only enter 1 for an AI or 2 for a real opponent");
                }
-
+               Player2.Name = i_PlayerName;
+               CurrentOpponent = Player2;
                return true;
           }
 
@@ -147,12 +146,23 @@ namespace GameEngine
           {
                get => m_GameBoard;
           }
+
           private Player m_Player1;
           private Player Player1
           {
                get => m_Player1;
                set => m_Player1 = value;
           } //fields are initialized to not AI, score - 0
+
+          public Player GetPlayer1()
+          {
+               return Player1;
+          }
+
+          public Player GetPlayer2()
+          {
+               return Player2;
+          }
 
           private Player m_Player2;
           public Player Player2
@@ -198,7 +208,7 @@ namespace GameEngine
                set => m_IsCurrentPlayer1 = value;
           }
 
-        
+
           public void SwitchToOtherPlayer()
           {
                isCurrentPlayer1 = !isCurrentPlayer1;
@@ -223,9 +233,10 @@ namespace GameEngine
                return retValue;
           }
 
-          public void InitializePlayerSkeleton()
+          public void InitializePlayerSkeleton(string i_PlayerName)
           {
                Player1 = new Player(false); //fields are initialized to not AI, score - 0
+               Player1.Name = i_PlayerName;
                isCurrentPlayer1 = true;
                CurrentPlayer = Player1;
                CurrentOpponent = Player2;

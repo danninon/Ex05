@@ -16,3 +16,14 @@ C:\Users\Z490\Downloads\Ex05\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debu
 C:\Users\Z490\Downloads\Ex05\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debug\FourInARowWindowsApp.csproj.CoreCompileInputs.cache
 C:\Users\Z490\Downloads\Ex05\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debug\C21 Ex05 Dan 314966482 Idan 314961293.exe
 C:\Users\Z490\Downloads\Ex05\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debug\C21 Ex05 Dan 314966482 Idan 314961293.pdb
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debug\FourInARowWindowsApp.csproj.AssemblyReference.cache
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debug\FourInARowWindowsApp.csproj.CoreCompileInputs.cache
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debug\C21 Ex05 Dan 314966482 Idan 314961293.pdb
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\bin\Debug\C21 Ex05 Dan 314966482 Idan 314961293.dll.config
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\bin\Debug\C21 Ex05 Dan 314966482 Idan 314961293.dll
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\bin\Debug\C21 Ex05 Dan 314966482 Idan 314961293.pdb
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\bin\Debug\GameEngine.dll
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\bin\Debug\GameEngine.pdb
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\bin\Debug\GameEngine.dll.config
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debug\FourInARowWindowsApp.csproj.CopyComplete
+C:\Users\idanm\source\repos\Ex05\C21 Ex05 Dan 314966482 Idan 314961293\obj\Debug\C21 Ex05 Dan 314966482 Idan 314961293.dll
