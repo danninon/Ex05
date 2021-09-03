@@ -179,7 +179,7 @@ namespace FourInARowWindows
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "SettingsMenu";
-            this.Text = "SettingsMenu123";
+            this.Text = "Settings Menu";
             this.ResumeLayout(false);
             this.PerformLayout();
 

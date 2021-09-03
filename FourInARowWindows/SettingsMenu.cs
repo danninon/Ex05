@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -45,7 +46,7 @@ namespace FourInARowWindows
             TextBox senderTB = sender as TextBox;
             if (status == true)
             {
-                senderTB.BackColor = Color.LightGreen;
+         //       senderTB.BackColor = Color.LightGreen;
             }
         }
 
@@ -71,7 +72,7 @@ namespace FourInARowWindows
                 textBoxPlayer2Input.Enabled = false;
             }
         }
-
+        
         private void OnStartClicked(object sender, EventArgs e)
         {
             ComboBox rowsCB = comboBoxRows;
@@ -87,13 +88,13 @@ namespace FourInARowWindows
             StringBuilder systemOutPutToUserBuilder = new StringBuilder();
             if (comboBoxRows.SelectedItem == null)
             {
-                comboBoxRows.BackColor = Color.IndianRed;
+           //     comboBoxRows.BackColor = Color.IndianRed;
                 systemOutPutToUserBuilder.Append("Please make sure you chose rows for the game table.");
                 errorAtForm = true;
             }
             else if (comboBoxCols.SelectedItem == null)
             {
-                comboBoxCols.BackColor = Color.IndianRed;
+           //     comboBoxCols.BackColor = Color.IndianRed;
                 systemOutPutToUserBuilder.Append("Please make sure you chose columns for the game table.");
                 errorAtForm = true;
             }
@@ -105,7 +106,10 @@ namespace FourInARowWindows
                 string userOpponentChoice = this.checkBoxPlayerTwo.Checked ? isAiOpponent : isHumanOpponent;
                 engine.InitializePlayer2AndOpponent(userOpponentChoice);
                 this.Close();
-                openGameForm();
+
+              //  GameForm form = new GameForm(IFourInARow engine);
+
+                runGameForm(); //TODO: link between forms
             }
 
             if (errorAtForm == true)
@@ -114,9 +118,7 @@ namespace FourInARowWindows
             }
         }
 
-        
-
-        private void openGameForm()
+        private void runGameForm()
         {
             throw new NotImplementedException();
         }
