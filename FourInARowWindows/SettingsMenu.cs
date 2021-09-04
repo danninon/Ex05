@@ -113,6 +113,7 @@ namespace FourInARowWindows
                //Application.SetCompatibleTextRenderingDefault(false);
                //Application.Run(new GameForm(engine)); //<--- SettingsMenu
                GameForm gameForm = new GameForm(engine);
+               this.Close();
           }
 
           private const string isAiOpponent = "1";

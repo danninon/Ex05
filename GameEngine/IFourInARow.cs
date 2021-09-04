@@ -16,5 +16,8 @@ namespace GameEngine
           Player GetPlayer2();
           GameBoard GetGameBoard();
           Player GetCurrentPlayer();
+          bool isPlayer1();
+          int GetLastMoveForAI();
+
      }
 }

@@ -14,37 +14,40 @@ namespace FourInARowWindows
      public partial class GameForm : Form
      {
           private readonly IFourInARow r_engine;
-          private readonly List<ActionButton> actionButtons;
-          private readonly List<GameButton> gameButtons;
+          private readonly List<ActionButton> r_actionButtons;
+          private readonly List<GameButton> r_gameButtons;
           GameEngineLogic.eGameStatus status;
 
           public GameForm(IFourInARow i_Engine)
           {
-               actionButtons = new List<ActionButton>();
-               gameButtons = new List<GameButton>();
+               r_actionButtons = new List<ActionButton>();
+               r_gameButtons = new List<GameButton>();
                r_engine = i_Engine;
                for(int i = 0; i < r_engine.GetGameBoard().NumOfCols; i++)
                {
-                    actionButtons.Add(new ActionButton(i+1));
+                    r_actionButtons.Add(new ActionButton(i+1));
                }
                for(int j = 0; j < r_engine.GetGameBoard().NumOfCols * r_engine.GetGameBoard().NumOfRows; j++)
                {
-                    gameButtons.Add(new GameButton());
+                    r_gameButtons.Add(new GameButton());
                }
 
                InitializeComponent();
+               gameTable.RowCount = r_engine.GetGameBoard().NumOfRows;
+               gameTable.ColumnCount = r_engine.GetGameBoard().NumOfCols;
 
-               foreach(ActionButton button in actionButtons)
+               foreach (ActionButton button in r_actionButtons)
                {
                     button.Click += new System.EventHandler(OnActionClicked);
-                    flowLayoutPanel1.Controls.Add(button);
+                    gameTable.Controls.Add(button);
                }
-               foreach(GameButton button in  gameButtons)
+               foreach(GameButton button in  r_gameButtons)
                {
-
-                    flowLayoutPanel1.Controls.Add(button);
+                    gameTable.Controls.Add(button);
+                    button.Anchor = AnchorStyles.Top;
                }
                generatePlayersNames();
+
                ShowDialog();
           }
 
@@ -59,23 +62,69 @@ namespace FourInARowWindows
           private void OnActionClicked(object sender, EventArgs e)
           {
                status = r_engine.CommitTurn((sender as Button).Text);
+               drawDisk(int.Parse((sender as Button).Text) - 1);
                if (r_engine.GetGameBoard().GameBoardMatrix[0, int.Parse((sender as Button).Text) - 1] != (byte)GameEngineLogic.ePlayerValue.NullValue)
                {
-                    this.Enabled = false;
+                    r_actionButtons[int.Parse((sender as Button).Text)].Enabled = false;
                }
-
-               if (status == GameEngineLogic.eGameStatus.Win)
-               {
-                    MessageBox.Show(r_engine.GetCurrentPlayer().Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo);
-               }
-               else if(status == GameEngineLogic.eGameStatus.Tie)
-               {
-                    MessageBox.Show("Tie!!\nAnother Round?", "A Tie!", MessageBoxButtons.YesNo);
-               }
+               showStatusMessage();
 
                if (r_engine.GetPlayer2().IsAnAi)
                {
-                    r_engine.CommitTurn(null);//This is a computer's automatic turn
+                    commitAITurn();
+
+               }
+          }
+
+          private void commitAITurn()
+          {
+               status = r_engine.CommitTurn(null); //This is a computer's automatic turn
+               drawDisk(r_engine.GetLastMoveForAI());
+               if (r_engine.GetGameBoard().GameBoardMatrix[0, r_engine.GetLastMoveForAI() - 1] != (byte)GameEngineLogic.ePlayerValue.NullValue)
+               {
+                    r_actionButtons[r_engine.GetLastMoveForAI()].Enabled = false;
+               }
+               showStatusMessage();
+          }
+
+          private void drawDisk(int i_col)
+          {
+               //for(int i = r_engine.GetGameBoard().NumOfRows - 1; i > 0; i--)
+               {
+                    if(r_gameButtons[i_col].Text == "")
+                    {
+                         r_gameButtons[0].ChangeText(!r_engine.isPlayer1()); // TODO: TEST ONLY - should be a proper index not 0
+                         //break;
+                    }
+               }
+          }
+
+          private void showStatusMessage()
+          {
+               Player currentPlayer = r_engine.GetCurrentPlayer();
+               if (status == GameEngineLogic.eGameStatus.Win)
+               {
+                    if (MessageBox.Show(currentPlayer.Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                         label1.Text = r_engine.GetPlayer1().Score.ToString();
+                         label2.Text = r_engine.GetPlayer2().Score.ToString();
+                         //TODO: start a new game
+                    }
+                    else
+                    {
+                         this.Close();
+                    }
+               }
+               else if (status == GameEngineLogic.eGameStatus.Tie)
+               {
+                    if (MessageBox.Show("Tie!!\nAnother Round?", "A Tie!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                         //TODO: start a new game
+                    }
+                    else
+                    {
+                         this.Close();
+                    }
                }
           }
      }

@@ -31,15 +31,13 @@ namespace FourInARowWindows
           {
                this.label1 = new System.Windows.Forms.Label();
                this.label2 = new System.Windows.Forms.Label();
-               this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-               this.button1 = new System.Windows.Forms.Button();
-               this.flowLayoutPanel1.SuspendLayout();
+               this.gameTable = new System.Windows.Forms.TableLayoutPanel();
                this.SuspendLayout();
                // 
                // label1
                // 
                this.label1.AutoSize = true;
-               this.label1.Location = new System.Drawing.Point(220, 396);
+               this.label1.Location = new System.Drawing.Point(130, 396);
                this.label1.Name = "label1";
                this.label1.Size = new System.Drawing.Size(51, 20);
                this.label1.TabIndex = 0;
@@ -48,46 +46,41 @@ namespace FourInARowWindows
                // label2
                // 
                this.label2.AutoSize = true;
-               this.label2.Location = new System.Drawing.Point(501, 396);
+               this.label2.Location = new System.Drawing.Point(478, 396);
                this.label2.Name = "label2";
                this.label2.Size = new System.Drawing.Size(51, 20);
                this.label2.TabIndex = 1;
                this.label2.Text = "label2";
                // 
-               // flowLayoutPanel1
+               // gameTable
                // 
-               this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-               this.flowLayoutPanel1.Controls.Add(this.button1);
-               this.flowLayoutPanel1.Location = new System.Drawing.Point(284, 144);
-               this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-               this.flowLayoutPanel1.Size = new System.Drawing.Size(200, 100);
-               this.flowLayoutPanel1.TabIndex = 2;
-               // 
-               // button1
-               // 
-               this.button1.Location = new System.Drawing.Point(3, 3);
-               this.button1.Name = "button1";
-               this.button1.Size = new System.Drawing.Size(75, 23);
-               this.button1.TabIndex = 0;
-               this.button1.Text = "1";
-               this.button1.UseVisualStyleBackColor = true;
-               this.button1.Click += new System.EventHandler(this.OnActionClicked);
+               this.gameTable.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+               this.gameTable.ColumnCount = 2;
+               this.gameTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+               this.gameTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+               this.gameTable.Dock = System.Windows.Forms.DockStyle.Top;
+               this.gameTable.Location = new System.Drawing.Point(0, 0);
+               this.gameTable.Name = "gameTable";
+               this.gameTable.RowCount = 2;
+               this.gameTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+               this.gameTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
+               this.gameTable.Size = new System.Drawing.Size(665, 393);
+               this.gameTable.TabIndex = 2;
                // 
                // GameForm
                // 
                this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
                this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+               this.AutoSize = true;
                this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-               this.ClientSize = new System.Drawing.Size(800, 450);
-               this.Controls.Add(this.flowLayoutPanel1);
+               this.ClientSize = new System.Drawing.Size(665, 450);
+               this.Controls.Add(this.gameTable);
                this.Controls.Add(this.label2);
                this.Controls.Add(this.label1);
                this.MaximizeBox = false;
                this.Name = "GameForm";
+               this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
                this.Text = "4 in a Raw !!";
-               this.flowLayoutPanel1.ResumeLayout(false);
                this.ResumeLayout(false);
                this.PerformLayout();
 
@@ -97,7 +90,6 @@ namespace FourInARowWindows
 
           private System.Windows.Forms.Label label1;
           private System.Windows.Forms.Label label2;
-          private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-          private System.Windows.Forms.Button button1;
+          private System.Windows.Forms.TableLayoutPanel gameTable;
      }
 }

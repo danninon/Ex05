@@ -12,6 +12,19 @@ namespace GameEngine
           private GameBoard m_GameBoard;
           public const string k_AiOpponent = "2";
           public const string k_RealOpponent = "1";
+          private int m_lastMoveForAI;
+
+          public int LastMoveForAI
+          {
+              get => m_lastMoveForAI;
+              set => m_lastMoveForAI = value;
+          }
+
+          public int GetLastMoveForAI()
+          {
+               return LastMoveForAI;
+          }
+
 
           public enum eGameStatus
           {
@@ -65,7 +78,11 @@ namespace GameEngine
 
           public eGameStatus CommitTurn(string io_UserChoice)
           {
-               int UserChoice = int.Parse(io_UserChoice);
+               int UserChoice = 0;
+               if (io_UserChoice!= null)
+               {
+                    UserChoice = int.Parse(io_UserChoice);
+               }
                byte currentPlayer = 1;
                eGameStatus currentStatus = eGameStatus.ContinuePlayingRound;
 
@@ -100,7 +117,8 @@ namespace GameEngine
 
           private int aiIncredibleLogic()
           {
-               return new Random().Next(1, m_GameBoard.NumOfCols);
+               LastMoveForAI =  new Random().Next(1, m_GameBoard.NumOfCols);
+               return LastMoveForAI;
           }
 
 
@@ -183,6 +201,11 @@ namespace GameEngine
           {
                get => m_IsCurrentPlayer1;
                set => m_IsCurrentPlayer1 = value;
+          }
+
+          public bool isPlayer1()
+          {
+               return isCurrentPlayer1;
           }
 
 
