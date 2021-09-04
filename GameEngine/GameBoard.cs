@@ -9,7 +9,7 @@ namespace GameEngine
      public class GameBoard
      {
           //[Rows, Cols]
-          private byte[,] m_GameBoardMatrix; //TODO: should be readonly (?)
+          private byte[,] m_GameBoardMatrix; //TODO: should be readonly (?), should be ePlayerDisk instead of byte
           public byte[,] GameBoardMatrix => m_GameBoardMatrix;
 
           private byte m_CellsFilled;
@@ -32,27 +32,16 @@ namespace GameEngine
                int.TryParse(i_StrNumOfRows, out m_NumOfRows);
                int.TryParse(i_StrNumOfCols, out m_NumOfCols);
 
-               //checks between 4 and 8
-               if (!(m_NumOfRows <= 8) || !(m_NumOfRows >= 4))
-               {
-                    throw new Exception("Illegal amount of rows chosen: You've been asked to choose a number between 4 and 8, whereas you've entered: " + i_StrNumOfRows + " which is, needless to say, an illegal amount.");
-               }
-
-               if (!(m_NumOfCols <= 8) || !(m_NumOfCols >= 4))
-               {
-                    throw new Exception("Illegal amount of columns chosen: You've been asked to choose a number between 4 and 8, whereas you've entered: " + i_StrNumOfCols + " which is, needless to say, an illegal amount.");
-               }
-
                // $G$ DSN-001 (-5) Coins should be represented by either a struct, a class or an enum.
                //initializes tables with 0s of the requested amount of rows and columns
                m_GameBoardMatrix = new byte[m_NumOfRows, m_NumOfCols];
           }
 
-          public void AddDisk(int i_UserChoice, GameEngineLogic.ePlayerValue i_NewValue)
+          public void AddDisk(int i_UserChoice, GameEngineLogic.ePlayerDisk i_NewValue)
           {
                for (int i = m_NumOfRows - 1; i >= 0; i--)
                {
-                    if (m_GameBoardMatrix[i, i_UserChoice - 1] == (byte)GameEngineLogic.ePlayerValue.NullValue)
+                    if (m_GameBoardMatrix[i, i_UserChoice - 1] == (byte)GameEngineLogic.ePlayerDisk.NullValue)
                     {
                          m_GameBoardMatrix[i, i_UserChoice - 1] = (byte)i_NewValue;
                          break;

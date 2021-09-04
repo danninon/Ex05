@@ -33,7 +33,7 @@ namespace FourInARowWindows
                }
 
                InitializeComponent();
-               gameTable.RowCount = r_engine.GetGameBoard().NumOfRows;
+               gameTable.RowCount = r_engine.GetGameBoard().NumOfRows + 1;
                gameTable.ColumnCount = r_engine.GetGameBoard().NumOfCols;
 
                foreach (ActionButton button in r_actionButtons)
@@ -44,6 +44,7 @@ namespace FourInARowWindows
                foreach(GameButton button in  r_gameButtons)
                {
                     gameTable.Controls.Add(button);
+                    button.Enabled = false;
                     button.Anchor = AnchorStyles.Top;
                }
                generatePlayersNames();
@@ -63,44 +64,50 @@ namespace FourInARowWindows
           {
                status = r_engine.CommitTurn((sender as Button).Text);
                drawDisk(int.Parse((sender as Button).Text) - 1);
-               if (r_engine.GetGameBoard().GameBoardMatrix[0, int.Parse((sender as Button).Text) - 1] != (byte)GameEngineLogic.ePlayerValue.NullValue)
+               if (r_engine.GetGameBoard().GameBoardMatrix[0, int.Parse((sender as Button).Text) - 1] != (byte)GameEngineLogic.ePlayerDisk.NullValue)
                {
-                    r_actionButtons[int.Parse((sender as Button).Text)].Enabled = false;
+                    r_actionButtons[int.Parse((sender as Button).Text) - 1].Enabled = false;
                }
-               showStatusMessage();
+               if(!showStatusMessage())
+               {
+                    return;
+               }
 
                if (r_engine.GetPlayer2().IsAnAi)
                {
                     commitAITurn();
-
+                    if(!showStatusMessage())
+                    {
+                         return;
+                    }
                }
           }
 
           private void commitAITurn()
           {
                status = r_engine.CommitTurn(null); //This is a computer's automatic turn
-               drawDisk(r_engine.GetLastMoveForAI());
-               if (r_engine.GetGameBoard().GameBoardMatrix[0, r_engine.GetLastMoveForAI() - 1] != (byte)GameEngineLogic.ePlayerValue.NullValue)
+               drawDisk(r_engine.GetLastMoveForAI() - 1);
+               if (r_engine.GetGameBoard().GameBoardMatrix[0, r_engine.GetLastMoveForAI() - 1] != (byte)GameEngineLogic.ePlayerDisk.NullValue)
                {
-                    r_actionButtons[r_engine.GetLastMoveForAI()].Enabled = false;
+                    r_actionButtons[r_engine.GetLastMoveForAI() - 1].Enabled = false;
                }
-               showStatusMessage();
           }
 
           private void drawDisk(int i_col)
           {
-               //for(int i = r_engine.GetGameBoard().NumOfRows - 1; i > 0; i--)
+               for(int i = r_engine.GetGameBoard().NumOfRows - 1; i >= 0; i--)
                {
-                    if(r_gameButtons[i_col].Text == "")
+                    if(r_gameButtons[i*r_engine.GetGameBoard().NumOfCols + i_col].Text == "")
                     {
-                         r_gameButtons[0].ChangeText(!r_engine.isPlayer1()); // TODO: TEST ONLY - should be a proper index not 0
-                         //break;
+                         r_gameButtons[i * r_engine.GetGameBoard().NumOfCols + i_col].ChangeText(!r_engine.isPlayer1());
+                         break;
                     }
                }
           }
 
-          private void showStatusMessage()
+          private bool showStatusMessage()
           {
+               bool isAnotherRound = true;
                Player currentPlayer = r_engine.GetCurrentPlayer();
                if (status == GameEngineLogic.eGameStatus.Win)
                {
@@ -123,9 +130,11 @@ namespace FourInARowWindows
                     }
                     else
                     {
+                         isAnotherRound = false;
                          this.Close();
                     }
                }
+               return isAnotherRound;
           }
      }
 }

@@ -25,7 +25,6 @@ namespace GameEngine
                return LastMoveForAI;
           }
 
-
           public enum eGameStatus
           {
                ContinuePlayingRound,
@@ -33,7 +32,7 @@ namespace GameEngine
                Win,
                Forfeit
           }
-          public enum ePlayerValue
+          public enum ePlayerDisk
           {
                NullValue,
                Player1,
@@ -88,17 +87,17 @@ namespace GameEngine
 
                if (this.isCurrentPlayer1)
                {
-                    m_GameBoard.AddDisk(UserChoice, ePlayerValue.Player1);
+                    m_GameBoard.AddDisk(UserChoice, ePlayerDisk.Player1);
                }
                else
                {
                     if (Player2.IsAnAi)
                     {
-                         m_GameBoard.AddDisk(aiIncredibleLogic(), ePlayerValue.Player2);
+                         m_GameBoard.AddDisk(aiIncredibleLogic(), ePlayerDisk.Player2);
                     }
                     else
                     {
-                         m_GameBoard.AddDisk(UserChoice, ePlayerValue.Player2);
+                         m_GameBoard.AddDisk(UserChoice, ePlayerDisk.Player2);
                     }
                     currentPlayer = 2;
                }
@@ -107,6 +106,7 @@ namespace GameEngine
                if (currentStatus == eGameStatus.Win)
                {
                     increaseScoreToPlayer(CurrentPlayer);
+                    SwitchToOtherPlayer();
                }
                else
                {
@@ -117,7 +117,12 @@ namespace GameEngine
 
           private int aiIncredibleLogic()
           {
-               LastMoveForAI =  new Random().Next(1, m_GameBoard.NumOfCols);
+               LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols);
+               while(GameBoard.GameBoardMatrix[0, LastMoveForAI - 1] != 0)
+               {
+                    LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols);
+               }
+
                return LastMoveForAI;
           }
 
