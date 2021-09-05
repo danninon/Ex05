@@ -41,3 +41,4 @@ C:\Users\idanm\Source\Repos\Ex05\FourInARowWindows\obj\Debug\FourInARowWindows.c
 C:\Users\idanm\Source\Repos\Ex05\FourInARowWindows\obj\Debug\FourInARowWindows.csproj.CopyComplete
 C:\Users\idanm\Source\Repos\Ex05\FourInARowWindows\obj\Debug\FourInARowWindows.exe
 C:\Users\idanm\Source\Repos\Ex05\FourInARowWindows\obj\Debug\FourInARowWindows.pdb
+C:\Users\Z490\source\repos\Ex05_With_Git\FourInARowWindows\obj\Debug\FourInARowWindows.GameForm.resources

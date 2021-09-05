@@ -31,9 +31,9 @@ namespace FourInARowWindows
           {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.TextpInputPlayer1Name = new System.Windows.Forms.TextBox();
+            this.TextInputPlayer1Name = new System.Windows.Forms.TextBox();
             this.checkBoxPlayerTwo = new System.Windows.Forms.CheckBox();
-            this.textBoxPlayer2Input = new System.Windows.Forms.TextBox();
+            this.textInputPlayer2Name = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -50,7 +50,6 @@ namespace FourInARowWindows
             this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Players:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -61,14 +60,12 @@ namespace FourInARowWindows
             this.label2.TabIndex = 1;
             this.label2.Text = "Players 1:";
             // 
-            // TextpInputPlayer1Name
+            // TextInputPlayer1Name
             // 
-            this.TextpInputPlayer1Name.Location = new System.Drawing.Point(116, 35);
-            this.TextpInputPlayer1Name.Name = "TextpInputPlayer1Name";
-            this.TextpInputPlayer1Name.Size = new System.Drawing.Size(100, 20);
-            this.TextpInputPlayer1Name.TabIndex = 2;
-            this.TextpInputPlayer1Name.Text = "\"Enter name here\"";
-            this.TextpInputPlayer1Name.TextChanged += new System.EventHandler(this.validateData);
+            this.TextInputPlayer1Name.Location = new System.Drawing.Point(116, 35);
+            this.TextInputPlayer1Name.Name = "TextInputPlayer1Name";
+            this.TextInputPlayer1Name.Size = new System.Drawing.Size(100, 20);
+            this.TextInputPlayer1Name.TabIndex = 2;
             // 
             // checkBoxPlayerTwo
             // 
@@ -81,15 +78,14 @@ namespace FourInARowWindows
             this.checkBoxPlayerTwo.UseVisualStyleBackColor = true;
             this.checkBoxPlayerTwo.CheckedChanged += new System.EventHandler(this.OnOpponentChanged);
             // 
-            // textBoxPlayer2Input
+            // textInputPlayer2Name
             // 
-            this.textBoxPlayer2Input.Enabled = false;
-            this.textBoxPlayer2Input.Location = new System.Drawing.Point(116, 61);
-            this.textBoxPlayer2Input.Name = "textBoxPlayer2Input";
-            this.textBoxPlayer2Input.ReadOnly = true;
-            this.textBoxPlayer2Input.Size = new System.Drawing.Size(100, 20);
-            this.textBoxPlayer2Input.TabIndex = 5;
-            this.textBoxPlayer2Input.Text = "[computer]";
+            this.textInputPlayer2Name.Enabled = false;
+            this.textInputPlayer2Name.Location = new System.Drawing.Point(116, 61);
+            this.textInputPlayer2Name.Name = "textInputPlayer2Name";
+            this.textInputPlayer2Name.Size = new System.Drawing.Size(100, 20);
+            this.textInputPlayer2Name.TabIndex = 5;
+            this.textInputPlayer2Name.Text = "[computer]";
             // 
             // label3
             // 
@@ -120,6 +116,9 @@ namespace FourInARowWindows
             // 
             // buttonStart
             // 
+            this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStart.Location = new System.Drawing.Point(12, 140);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(217, 23);
@@ -130,7 +129,7 @@ namespace FourInARowWindows
             // 
             // comboBoxRows
             // 
-            this.comboBoxRows.FormattingEnabled = true;
+            this.comboBoxRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRows.Items.AddRange(new object[] {
             "4",
             "5",
@@ -143,10 +142,11 @@ namespace FourInARowWindows
             this.comboBoxRows.Name = "comboBoxRows";
             this.comboBoxRows.Size = new System.Drawing.Size(69, 21);
             this.comboBoxRows.TabIndex = 12;
-            this.comboBoxRows.Text = "Choose:";
+            this.comboBoxRows.SelectedIndexChanged += new System.EventHandler(this.comboBoxRows_SelectedIndexChanged);
             // 
             // comboBoxCols
             // 
+            this.comboBoxCols.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCols.FormattingEnabled = true;
             this.comboBoxCols.Items.AddRange(new object[] {
             "4",
@@ -160,10 +160,10 @@ namespace FourInARowWindows
             this.comboBoxCols.Name = "comboBoxCols";
             this.comboBoxCols.Size = new System.Drawing.Size(69, 21);
             this.comboBoxCols.TabIndex = 13;
-            this.comboBoxCols.Text = "Choose:";
             // 
             // SettingsMenu
             // 
+            this.AcceptButton = this.buttonStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(278, 202);
@@ -173,9 +173,9 @@ namespace FourInARowWindows
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBoxPlayer2Input);
+            this.Controls.Add(this.textInputPlayer2Name);
             this.Controls.Add(this.checkBoxPlayerTwo);
-            this.Controls.Add(this.TextpInputPlayer1Name);
+            this.Controls.Add(this.TextInputPlayer1Name);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "SettingsMenu";
@@ -189,9 +189,9 @@ namespace FourInARowWindows
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox TextpInputPlayer1Name;
+        private System.Windows.Forms.TextBox TextInputPlayer1Name;
         private System.Windows.Forms.CheckBox checkBoxPlayerTwo;
-        private System.Windows.Forms.TextBox textBoxPlayer2Input;
+        private System.Windows.Forms.TextBox textInputPlayer2Name;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
