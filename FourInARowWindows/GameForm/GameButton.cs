@@ -9,25 +9,15 @@ namespace FourInARowWindows
 {
      public class GameButton : Button
      {
-          private const string k_player1Figure = "X";
-          private const string k_player2Figure = "O";
+          public const string k_player1Figure = "X";
+          public const string k_player2Figure = "O";
+          public const string k_nullFigure = "";
         
           public GameButton()
           {
             this.Height = 40;
             this.Width = 40;
           }
-          public void ChangeText(bool i_isPlayer1)
-          {
-              
-            if (i_isPlayer1)
-               {
-                    this.Text = k_player1Figure;
-               }
-               else
-               {
-                    this.Text = k_player2Figure;
-               }
-          }
+
      }
 }

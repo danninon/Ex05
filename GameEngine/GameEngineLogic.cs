@@ -15,6 +15,11 @@ namespace GameEngine
           public const string k_RealOpponent = "1";
           private int m_LastColColMove;
 
+          public GameEngineLogic.ePlayerDisk GetMatrixValue(int i_Row, int i_Col)
+          {
+               return m_GameBoard.GameBoardMatrix[i_Row, i_Col];
+          }
+
           public int LastColMove
           {
               get => m_LastColColMove;
@@ -29,6 +34,11 @@ namespace GameEngine
           public int GetNumOfCols()
           {
                return m_GameBoard.NumOfCols;
+          }
+
+          public int GetNumOfRows()
+          {
+               return m_GameBoard.NumOfRows;
           }
 
           public enum eGameStatus
@@ -55,8 +65,7 @@ namespace GameEngine
                CurrentOpponent = Player2;
           }
 
-          // $G$ CSS-014 (-3) Bad parameter name (should be in the form of o_PascalCase).
-
+          // $G$ CSS-014 (-3) Bad parameter name (should be in the form of o_PascalCase)
           public void CreateGameBoard(string i_RowsInTable, string i_ColsInTable)
           {
                m_GameBoard = new GameBoard(i_RowsInTable, i_ColsInTable);
@@ -90,7 +99,7 @@ namespace GameEngine
                     UserChoice = int.Parse(io_UserChoice);
                     LastColMove = UserChoice;
                }
-               byte currentPlayer = 1;
+               GameEngineLogic.ePlayerDisk currentPlayer = GameEngineLogic.ePlayerDisk.Player1;
                eGameStatus currentStatus = eGameStatus.ContinuePlayingRound;
 
 
@@ -109,7 +118,7 @@ namespace GameEngine
                     {
                          m_GameBoard.AddDisk(UserChoice, ePlayerDisk.Player2);
                     }
-                    currentPlayer = 2;
+                    currentPlayer = GameEngineLogic.ePlayerDisk.Player2;
                }
 
                currentStatus = m_GameBoard.CheckGameStatus(currentPlayer);
@@ -124,10 +133,10 @@ namespace GameEngine
           public int SimpleAiLogic()
           {
                
-              int LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols);
-               while(GameBoard.GameBoardMatrix[0, LastMoveForAI - 1] != 0)
+              int LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols + 1);
+               while(m_GameBoard.GameBoardMatrix[0, LastMoveForAI - 1] != GameEngineLogic.ePlayerDisk.NullValue)
                {
-                    LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols);
+                    LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols + 1);
                }
 
                return LastMoveForAI;
@@ -185,13 +194,18 @@ namespace GameEngine
                return CurrentPlayer;
           }
 
+          public Player GetOppositePlayer()
+          {
+               return CurrentOpponent;
+          }
+
           private Player m_CurrentOpponent;
 
           public Player CurrentOpponent
           {
                get => m_CurrentOpponent;
                set => m_CurrentOpponent = value;
-          }
+          } 
 
           private bool m_IsCurrentPlayer1;
 

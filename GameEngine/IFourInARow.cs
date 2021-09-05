@@ -20,7 +20,9 @@ namespace GameEngine
           Player GetCurrentPlayer();
           bool isPlayer1();
           int GetLastColMove();
-
+          GameEngineLogic.ePlayerDisk GetMatrixValue(int i_Row, int i_Col);
           int GetNumOfCols();
+          int GetNumOfRows();
+          Player GetOppositePlayer();
      }
 }

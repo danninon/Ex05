@@ -15,7 +15,6 @@ namespace FourInARowWindows
     public partial class SettingsMenu : Form
     {
         private readonly IFourInARow engine;
-        private readonly GameBoard gameBoard;
 
         private const string k_ComputerOpponentName = "[Computer]";
         private const string k_ErrorFormTitle = "Error log:";
