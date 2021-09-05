@@ -25,6 +25,7 @@ namespace FourInARowWindows
                r_actionButtons = new List<ActionButton>();
                r_gameButtons = new List<GameButton>();
                r_engine = i_Engine;
+
                for (int i = 0; i < r_engine.GetGameBoard().NumOfCols; i++)
                {
                     r_actionButtons.Add(new ActionButton(i + 1));
@@ -35,41 +36,43 @@ namespace FourInARowWindows
                }
 
                InitializeComponent();
+
                gameTable.RowCount = r_engine.GetGameBoard().NumOfRows + 1;
                gameTable.ColumnCount = r_engine.GetGameBoard().NumOfCols;
+               this.Size = new Size(r_engine.GetNumOfCols()*50, r_engine.GetNumOfRows()*55);
+               this.gameTable.Size = new Size(r_engine.GetNumOfCols() * 45, r_engine.GetNumOfRows() * 50);
 
-               foreach (ActionButton button in r_actionButtons)
+              foreach (ActionButton button in r_actionButtons)
                {
-                    button.Click += new System.EventHandler(OnActionClicked);
-                    gameTable.Controls.Add(button);
-                    // button.Anchor = (AnchorStyles)(Top);
+                    
+                button.Click += OnActionClicked;
+                gameTable.Controls.Add(button);
 
                }
                foreach (GameButton button in r_gameButtons)
                {
                     gameTable.Controls.Add(button);
-                    button.Enabled = false;
-                    // button.Anchor = AnchorStyles.Top;
+                    button.Enabled = true;
+                    
                }
                updatePlayerStampsFromEngine();
-
                ShowDialog();
           }
 
+         
           private void updatePlayerStampsFromEngine()
           {
                Player player1 = r_engine.GetPlayer1();
                Player player2 = r_engine.GetPlayer2();
-               string label1String;
+               
 
-               label1.Text = player1.Name + ": " + player1.Score;
-               label2.Text = player2.Name + ": " + player2.Score;
+               label3.Text = player1.Name + ": " + player1.Score;
+               label4.Text = player2.Name + ": " + player2.Score;
           }
 
           private void OnActionClicked(object sender, EventArgs e)
           {
 
-               bool anotherRound = false;
                ActionButton pressedButton = sender as ActionButton;
                string stringToEngine = pressedButton.Text;
                turn(stringToEngine);
@@ -155,38 +158,38 @@ namespace FourInARowWindows
                }
           }
 
-          private void GameForm_Load(object sender, EventArgs e)
-          {
 
-          }
 
-          // private bool IsContinueRound()
-          // {
-          //     bool isAnotherRound = true;
-          //     Player currentPlayer = r_engine.GetCurrentPlayer();
-          //     if (status == GameEngineLogic.eGameStatus.Win)
-          //     {
-          //         if (MessageBox.Show(currentPlayer.Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-          //         {
-          //             currentPlayer = 
-          //         }
-          //         else
-          //         {
-          //             this.Close();
-          //         }
-          //     }
-          //     else if (status == GameEngineLogic.eGameStatus.Tie)
-          //     {
-          //
-          //     }
-          //     else
-          //     {
-          //         isAnotherRound = false;
-          //
-          //         this.Close();
-          //     }
-          //     return isAnotherRound;
-          //     }
 
-     }
+
+
+        // private bool IsContinueRound()
+        // {
+        //     bool isAnotherRound = true;
+        //     Player currentPlayer = r_engine.GetCurrentPlayer();
+        //     if (status == GameEngineLogic.eGameStatus.Win)
+        //     {
+        //         if (MessageBox.Show(currentPlayer.Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+        //         {
+        //             currentPlayer = 
+        //         }
+        //         else
+        //         {
+        //             this.Close();
+        //         }
+        //     }
+        //     else if (status == GameEngineLogic.eGameStatus.Tie)
+        //     {
+        //
+        //     }
+        //     else
+        //     {
+        //         isAnotherRound = false;
+        //
+        //         this.Close();
+        //     }
+        //     return isAnotherRound;
+        //     }
+
+    }
 }

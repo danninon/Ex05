@@ -62,7 +62,7 @@ namespace FourInARowWindows
             {
 
                 engine.InitializePlayerSkeleton(TextInputPlayer1Name.Text);
-                engine.CreateGameBoard(comboBoxRows.SelectedItem.ToString(), comboBoxCols.SelectedItem.ToString());
+                engine.CreateGameBoard(NUDRows.Text, NUDCols.Text);
                 string userOpponentChoice = this.checkBoxPlayerTwo.Checked ? isAiOpponent : isHumanOpponent;
                 engine.InitializePlayer2AndOpponent(userOpponentChoice, textInputPlayer2Name.Text);
                 this.Hide();
@@ -90,52 +90,25 @@ namespace FourInARowWindows
                 errorAtForm = true;
             }
 
-            if (comboBoxRows.SelectedItem == null)
-            {
-                //    comboBoxRows.BackColor = Color.IndianRed;
-                io_SystemOutPutToUserBuilder.Append("Please make sure you chose rows for the game table." +
-                                                 Environment.NewLine);
-                errorAtForm = true;
-            }
-
-            if (comboBoxCols.SelectedItem == null)
-            {
-                //     comboBoxCols.BackColor = Color.IndianRed;
-                io_SystemOutPutToUserBuilder.Append("Please make sure you chose columns for the game table." + Environment.NewLine);
-                errorAtForm = true;
-            }
             return errorAtForm;
         }
 
 
         private void openGameForm()
         {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new GameForm(engine)); //<--- SettingsMenu
-            //    DialogResult thisDR = this.DialogResult;
-            // DialogResult dr = this.DialogResult.;
-
             GameForm gameForm = new GameForm(engine);
             this.Close();
-
         }
 
         private const string isAiOpponent = "1";
         private const string isHumanOpponent = "2";
 
-        private void comboBoxRows_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         //TODO: DELETE WHEN HANDING THE PROJECT
         private void testSettings()
         {
             TextInputPlayer1Name.Text = "E.g Yusuf";
-            comboBoxCols.Text = "4";
-            comboBoxRows.Text = "4";
-
         }
     }
 
