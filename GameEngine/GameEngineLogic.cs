@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GameEngine
@@ -12,17 +13,22 @@ namespace GameEngine
           private GameBoard m_GameBoard;
           public const string k_AiOpponent = "2";
           public const string k_RealOpponent = "1";
-          private int m_lastMoveForAI;
+          private int m_LastColColMove;
 
-          public int LastMoveForAI
+          public int LastColMove
           {
-              get => m_lastMoveForAI;
-              set => m_lastMoveForAI = value;
+              get => m_LastColColMove;
+              set => m_LastColColMove = value;
           }
 
-          public int GetLastMoveForAI()
+          public int GetLastColMove()
           {
-               return LastMoveForAI;
+               return LastColMove;
+          }
+
+          public int GetNumOfCols()
+          {
+               return m_GameBoard.NumOfCols;
           }
 
           public enum eGameStatus
@@ -50,6 +56,7 @@ namespace GameEngine
           }
 
           // $G$ CSS-014 (-3) Bad parameter name (should be in the form of o_PascalCase).
+
           public void CreateGameBoard(string i_RowsInTable, string i_ColsInTable)
           {
                m_GameBoard = new GameBoard(i_RowsInTable, i_ColsInTable);
@@ -81,9 +88,11 @@ namespace GameEngine
                if (io_UserChoice!= null)
                {
                     UserChoice = int.Parse(io_UserChoice);
+                    LastColMove = UserChoice;
                }
                byte currentPlayer = 1;
                eGameStatus currentStatus = eGameStatus.ContinuePlayingRound;
+
 
                if (this.isCurrentPlayer1)
                {
@@ -93,7 +102,8 @@ namespace GameEngine
                {
                     if (Player2.IsAnAi)
                     {
-                         m_GameBoard.AddDisk(aiIncredibleLogic(), ePlayerDisk.Player2);
+
+                         m_GameBoard.AddDisk(SimpleAiLogic(), ePlayerDisk.Player2);
                     }
                     else
                     {
@@ -106,18 +116,15 @@ namespace GameEngine
                if (currentStatus == eGameStatus.Win)
                {
                     increaseScoreToPlayer(CurrentPlayer);
-                    SwitchToOtherPlayer();
                }
-               else
-               {
-                    SwitchToOtherPlayer();
-               }
-               return currentStatus;
+               SwitchToOtherPlayer();
+            return currentStatus;
           }
 
-          private int aiIncredibleLogic()
+          public int SimpleAiLogic()
           {
-               LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols);
+               
+              int LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols);
                while(GameBoard.GameBoardMatrix[0, LastMoveForAI - 1] != 0)
                {
                     LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols);

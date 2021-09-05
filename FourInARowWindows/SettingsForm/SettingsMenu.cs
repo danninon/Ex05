@@ -26,6 +26,7 @@ namespace FourInARowWindows
             //logical configuring - might want to put into separate method
             engine = new GameEngineLogic();
             InitializeComponent();
+            testSettings();
         }
 
         public SettingsMenu(IFourInARow i_Engine)
@@ -113,10 +114,12 @@ namespace FourInARowWindows
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new GameForm(engine)); //<--- SettingsMenu
-           DialogResult thisDR = this.DialogResult;
+            //    DialogResult thisDR = this.DialogResult;
             // DialogResult dr = this.DialogResult.;
+
             GameForm gameForm = new GameForm(engine);
             this.Close();
+
         }
 
         private const string isAiOpponent = "1";
@@ -126,5 +129,15 @@ namespace FourInARowWindows
         {
 
         }
+
+        //TODO: DELETE WHEN HANDING THE PROJECT
+        private void testSettings()
+        {
+            TextInputPlayer1Name.Text = "E.g Yusuf";
+            comboBoxCols.Text = "4";
+            comboBoxRows.Text = "4";
+
+        }
     }
+
 }

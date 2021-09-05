@@ -19,3 +19,10 @@ C:\Users\idanm\Source\Repos\Ex05\GameEngine\obj\Debug\GameEngine.csproj.Assembly
 C:\Users\idanm\Source\Repos\Ex05\GameEngine\obj\Debug\GameEngine.csproj.CoreCompileInputs.cache
 C:\Users\idanm\Source\Repos\Ex05\GameEngine\obj\Debug\GameEngine.dll
 C:\Users\idanm\Source\Repos\Ex05\GameEngine\obj\Debug\GameEngine.pdb
+C:\Users\Z490\source\repos\Ex05_With_Git\GameEngine\bin\Debug\GameEngine.dll.config
+C:\Users\Z490\source\repos\Ex05_With_Git\GameEngine\bin\Debug\GameEngine.dll
+C:\Users\Z490\source\repos\Ex05_With_Git\GameEngine\bin\Debug\GameEngine.pdb
+C:\Users\Z490\source\repos\Ex05_With_Git\GameEngine\obj\Debug\GameEngine.csproj.AssemblyReference.cache
+C:\Users\Z490\source\repos\Ex05_With_Git\GameEngine\obj\Debug\GameEngine.csproj.CoreCompileInputs.cache
+C:\Users\Z490\source\repos\Ex05_With_Git\GameEngine\obj\Debug\GameEngine.dll
+C:\Users\Z490\source\repos\Ex05_With_Git\GameEngine\obj\Debug\GameEngine.pdb

@@ -65,7 +65,7 @@ namespace FourInARowWindows
             this.TextInputPlayer1Name.Location = new System.Drawing.Point(116, 35);
             this.TextInputPlayer1Name.Name = "TextInputPlayer1Name";
             this.TextInputPlayer1Name.Size = new System.Drawing.Size(100, 20);
-            this.TextInputPlayer1Name.TabIndex = 2;
+            this.TextInputPlayer1Name.TabIndex = 1;
             // 
             // checkBoxPlayerTwo
             // 
@@ -73,7 +73,7 @@ namespace FourInARowWindows
             this.checkBoxPlayerTwo.Location = new System.Drawing.Point(28, 61);
             this.checkBoxPlayerTwo.Name = "checkBoxPlayerTwo";
             this.checkBoxPlayerTwo.Size = new System.Drawing.Size(72, 17);
-            this.checkBoxPlayerTwo.TabIndex = 4;
+            this.checkBoxPlayerTwo.TabIndex = 2;
             this.checkBoxPlayerTwo.Text = "Players 2:";
             this.checkBoxPlayerTwo.UseVisualStyleBackColor = true;
             this.checkBoxPlayerTwo.CheckedChanged += new System.EventHandler(this.OnOpponentChanged);
@@ -84,7 +84,7 @@ namespace FourInARowWindows
             this.textInputPlayer2Name.Location = new System.Drawing.Point(116, 61);
             this.textInputPlayer2Name.Name = "textInputPlayer2Name";
             this.textInputPlayer2Name.Size = new System.Drawing.Size(100, 20);
-            this.textInputPlayer2Name.TabIndex = 5;
+            this.textInputPlayer2Name.TabIndex = 3;
             this.textInputPlayer2Name.Text = "[computer]";
             // 
             // label3
@@ -93,25 +93,25 @@ namespace FourInARowWindows
             this.label3.Location = new System.Drawing.Point(16, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 6;
+            this.label3.TabIndex = 4;
             this.label3.Text = "Board Size:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(39, 116);
+            this.label4.Location = new System.Drawing.Point(20, 116);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 13);
-            this.label4.TabIndex = 7;
+            this.label4.TabIndex = 5;
             this.label4.Text = "Rows:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(165, 116);
+            this.label5.Location = new System.Drawing.Point(129, 116);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 8;
+            this.label5.TabIndex = 7;
             this.label5.Text = "Cols:";
             // 
             // buttonStart
@@ -121,8 +121,8 @@ namespace FourInARowWindows
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStart.Location = new System.Drawing.Point(12, 140);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(217, 23);
-            this.buttonStart.TabIndex = 11;
+            this.buttonStart.Size = new System.Drawing.Size(222, 25);
+            this.buttonStart.TabIndex = 9;
             this.buttonStart.Text = "Start!";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.OnStartClicked);
@@ -138,10 +138,10 @@ namespace FourInARowWindows
             "8",
             "9",
             "10"});
-            this.comboBoxRows.Location = new System.Drawing.Point(82, 113);
+            this.comboBoxRows.Location = new System.Drawing.Point(54, 113);
             this.comboBoxRows.Name = "comboBoxRows";
             this.comboBoxRows.Size = new System.Drawing.Size(69, 21);
-            this.comboBoxRows.TabIndex = 12;
+            this.comboBoxRows.TabIndex = 6;
             this.comboBoxRows.SelectedIndexChanged += new System.EventHandler(this.comboBoxRows_SelectedIndexChanged);
             // 
             // comboBoxCols
@@ -156,17 +156,17 @@ namespace FourInARowWindows
             "8",
             "9",
             "10"});
-            this.comboBoxCols.Location = new System.Drawing.Point(201, 113);
+            this.comboBoxCols.Location = new System.Drawing.Point(161, 113);
             this.comboBoxCols.Name = "comboBoxCols";
             this.comboBoxCols.Size = new System.Drawing.Size(69, 21);
-            this.comboBoxCols.TabIndex = 13;
+            this.comboBoxCols.TabIndex = 8;
             // 
             // SettingsMenu
             // 
             this.AcceptButton = this.buttonStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(278, 202);
+            this.ClientSize = new System.Drawing.Size(255, 216);
             this.Controls.Add(this.comboBoxCols);
             this.Controls.Add(this.comboBoxRows);
             this.Controls.Add(this.buttonStart);
@@ -178,8 +178,10 @@ namespace FourInARowWindows
             this.Controls.Add(this.TextInputPlayer1Name);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "SettingsMenu";
-            this.Text = "SettingsMenu123";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Game Settings";
             this.ResumeLayout(false);
             this.PerformLayout();
 
