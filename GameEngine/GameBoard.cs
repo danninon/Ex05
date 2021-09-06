@@ -9,8 +9,8 @@ namespace GameEngine
      public class GameBoard
      {
           //[Rows, Cols]
-          private GameEngineLogic.ePlayerDisk[,] m_GameBoardMatrix; //TODO: should be readonly (?), should be ePlayerDisk instead of byte
-          public GameEngineLogic.ePlayerDisk[,] GameBoardMatrix => m_GameBoardMatrix;
+          private readonly GameEngineLogic.ePlayerDisk[,] r_GameBoardMatrix;
+          public GameEngineLogic.ePlayerDisk[,] GameBoardMatrix => r_GameBoardMatrix;
 
           private byte m_CellsFilled;
           public byte CellsFilled => m_CellsFilled;
@@ -28,16 +28,16 @@ namespace GameEngine
                int.TryParse(i_StrNumOfCols, out m_NumOfCols);
 
                //initializes tables with 0s of the requested amount of rows and columns
-               m_GameBoardMatrix = new GameEngineLogic.ePlayerDisk[m_NumOfRows, m_NumOfCols];
+               r_GameBoardMatrix = new GameEngineLogic.ePlayerDisk[m_NumOfRows, m_NumOfCols];
           }
 
           public void AddDisk(int i_UserChoice, GameEngineLogic.ePlayerDisk i_NewValue)
           {
                for (int i = m_NumOfRows - 1; i >= 0; i--)
                {
-                    if (m_GameBoardMatrix[i, i_UserChoice - 1] == GameEngineLogic.ePlayerDisk.NullValue)
+                    if (r_GameBoardMatrix[i, i_UserChoice - 1] == GameEngineLogic.ePlayerDisk.NullValue)
                     {
-                         m_GameBoardMatrix[i, i_UserChoice - 1] = i_NewValue;
+                         r_GameBoardMatrix[i, i_UserChoice - 1] = i_NewValue;
                          break;
                     }
                }
@@ -68,8 +68,8 @@ namespace GameEngine
                {
                     for (int i = 0; i < m_NumOfRows - 3; i++)
                     {
-                         if ((m_GameBoardMatrix[i, j] == i_CurrentPlayer) && (m_GameBoardMatrix[i + 1, j] == i_CurrentPlayer)
-                              && (m_GameBoardMatrix[i + 2, j] == i_CurrentPlayer) && (m_GameBoardMatrix[i + 3, j] == i_CurrentPlayer))
+                         if ((r_GameBoardMatrix[i, j] == i_CurrentPlayer) && (r_GameBoardMatrix[i + 1, j] == i_CurrentPlayer)
+                              && (r_GameBoardMatrix[i + 2, j] == i_CurrentPlayer) && (r_GameBoardMatrix[i + 3, j] == i_CurrentPlayer))
                          {
                               status = GameEngineLogic.eGameStatus.Win;
                          }
@@ -83,8 +83,8 @@ namespace GameEngine
                {
                     for (int i = 0; i < m_NumOfRows; i++)
                     {
-                         if ((m_GameBoardMatrix[i, j] == i_CurrentPlayer) && (m_GameBoardMatrix[i, j + 1] == i_CurrentPlayer)
-                              && (m_GameBoardMatrix[i, j + 2] == i_CurrentPlayer) && (m_GameBoardMatrix[i, j + 3] == i_CurrentPlayer))
+                         if ((r_GameBoardMatrix[i, j] == i_CurrentPlayer) && (r_GameBoardMatrix[i, j + 1] == i_CurrentPlayer)
+                              && (r_GameBoardMatrix[i, j + 2] == i_CurrentPlayer) && (r_GameBoardMatrix[i, j + 3] == i_CurrentPlayer))
                          {
                               status = GameEngineLogic.eGameStatus.Win;
                          }
@@ -98,8 +98,8 @@ namespace GameEngine
                {
                     for (int i = 3; i < m_NumOfRows; i++)
                     {
-                         if ((m_GameBoardMatrix[i, j] == i_CurrentPlayer) && (m_GameBoardMatrix[i - 1, j + 1] == i_CurrentPlayer)
-                              && (m_GameBoardMatrix[i - 2, j + 2] == i_CurrentPlayer) && (m_GameBoardMatrix[i - 3, j + 3] == i_CurrentPlayer))
+                         if ((r_GameBoardMatrix[i, j] == i_CurrentPlayer) && (r_GameBoardMatrix[i - 1, j + 1] == i_CurrentPlayer)
+                              && (r_GameBoardMatrix[i - 2, j + 2] == i_CurrentPlayer) && (r_GameBoardMatrix[i - 3, j + 3] == i_CurrentPlayer))
                          {
                               status = GameEngineLogic.eGameStatus.Win;
                          }
@@ -113,8 +113,8 @@ namespace GameEngine
                {
                     for (int i = 0; i < m_NumOfRows - 3; i++)
                     {
-                         if ((m_GameBoardMatrix[i, j] == i_CurrentPlayer) && (m_GameBoardMatrix[i + 1, j + 1] == i_CurrentPlayer)
-                              && (m_GameBoardMatrix[i + 2, j + 2] == i_CurrentPlayer) && (m_GameBoardMatrix[i + 3, j + 3] == i_CurrentPlayer))
+                         if ((r_GameBoardMatrix[i, j] == i_CurrentPlayer) && (r_GameBoardMatrix[i + 1, j + 1] == i_CurrentPlayer)
+                              && (r_GameBoardMatrix[i + 2, j + 2] == i_CurrentPlayer) && (r_GameBoardMatrix[i + 3, j + 3] == i_CurrentPlayer))
                          {
                               status = GameEngineLogic.eGameStatus.Win;
                          }
@@ -124,7 +124,13 @@ namespace GameEngine
 
           public void Clear()
           {
-               m_GameBoardMatrix = new GameEngineLogic.ePlayerDisk[m_NumOfRows, m_NumOfCols];
+               for(int i = 0; i < m_NumOfRows; i++)
+               {
+                    for(int j = 0; j < m_NumOfCols; j++)
+                    {
+                         r_GameBoardMatrix[i, j] = GameEngineLogic.ePlayerDisk.NullValue;
+                    }
+               }
                m_CellsFilled = 0;
           }
      }

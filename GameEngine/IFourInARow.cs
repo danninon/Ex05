@@ -9,9 +9,7 @@ namespace GameEngine
      public interface IFourInARow
      {
           void NewRound();
-          void CreateGameBoard(string i_RowsInTable, string i_ColsInTable);
           bool InitializePlayer2AndOpponent(string i_ReadLine, string i_PlayerName);
-          void InitializePlayerSkeleton(string i_PlayerName);
           int SimpleAiLogic();
           GameEngineLogic.eGameStatus CommitTurn(string io_UserChoice);
           Player GetPlayer1();

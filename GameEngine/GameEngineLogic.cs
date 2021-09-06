@@ -9,15 +9,14 @@ namespace GameEngine
 {
      public class GameEngineLogic : IFourInARow
      {
-          // $G$ CSS-999 (-2) this member should be readonly.
-          private GameBoard m_GameBoard;
+          private readonly GameBoard r_GameBoard;
           public const string k_AiOpponent = "2";
           public const string k_RealOpponent = "1";
           private int m_LastColColMove;
 
           public GameEngineLogic.ePlayerDisk GetMatrixValue(int i_Row, int i_Col)
           {
-               return m_GameBoard.GameBoardMatrix[i_Row, i_Col];
+               return r_GameBoard.GameBoardMatrix[i_Row, i_Col];
           }
 
           public int LastColMove
@@ -33,12 +32,12 @@ namespace GameEngine
 
           public int GetNumOfCols()
           {
-               return m_GameBoard.NumOfCols;
+               return r_GameBoard.NumOfCols;
           }
 
           public int GetNumOfRows()
           {
-               return m_GameBoard.NumOfRows;
+               return r_GameBoard.NumOfRows;
           }
 
           public enum eGameStatus
@@ -55,20 +54,13 @@ namespace GameEngine
                Player2
           }
 
-          // $G$ DSN-004 (-5) Redundant code duplication, should call InitializePlayerSkeleton
-          //ctor - actually initializes o_Player 1
-          public GameEngineLogic()
+          public GameEngineLogic(string i_RowsInTable, string i_ColsInTable)
           {
+               r_GameBoard = new GameBoard(i_RowsInTable, i_ColsInTable);
                Player1 = new Player(false); //fields are initialized to not AI, score - 0
                isCurrentPlayer1 = true;
                CurrentPlayer = Player1;
                CurrentOpponent = Player2;
-          }
-
-          // $G$ CSS-014 (-3) Bad parameter name (should be in the form of o_PascalCase)
-          public void CreateGameBoard(string i_RowsInTable, string i_ColsInTable)
-          {
-               m_GameBoard = new GameBoard(i_RowsInTable, i_ColsInTable);
           }
 
           //assumes no turns have been made into the game yet, a
@@ -105,23 +97,23 @@ namespace GameEngine
 
                if (this.isCurrentPlayer1)
                {
-                    m_GameBoard.AddDisk(UserChoice, ePlayerDisk.Player1);
+                    r_GameBoard.AddDisk(UserChoice, ePlayerDisk.Player1);
                }
                else
                {
                     if (Player2.IsAnAi)
                     {
 
-                         m_GameBoard.AddDisk(SimpleAiLogic(), ePlayerDisk.Player2);
+                         r_GameBoard.AddDisk(SimpleAiLogic(), ePlayerDisk.Player2);
                     }
                     else
                     {
-                         m_GameBoard.AddDisk(UserChoice, ePlayerDisk.Player2);
+                         r_GameBoard.AddDisk(UserChoice, ePlayerDisk.Player2);
                     }
                     currentPlayer = GameEngineLogic.ePlayerDisk.Player2;
                }
 
-               currentStatus = m_GameBoard.CheckGameStatus(currentPlayer);
+               currentStatus = r_GameBoard.CheckGameStatus(currentPlayer);
                if (currentStatus == eGameStatus.Win)
                {
                     increaseScoreToPlayer(CurrentPlayer);
@@ -133,10 +125,10 @@ namespace GameEngine
           public int SimpleAiLogic()
           {
                
-              int LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols + 1);
-               while(m_GameBoard.GameBoardMatrix[0, LastMoveForAI - 1] != GameEngineLogic.ePlayerDisk.NullValue)
+              int LastMoveForAI = new Random().Next(1, r_GameBoard.NumOfCols + 1);
+               while(r_GameBoard.GameBoardMatrix[0, LastMoveForAI - 1] != GameEngineLogic.ePlayerDisk.NullValue)
                {
-                    LastMoveForAI = new Random().Next(1, m_GameBoard.NumOfCols + 1);
+                    LastMoveForAI = new Random().Next(1, r_GameBoard.NumOfCols + 1);
                }
 
                return LastMoveForAI;
@@ -150,7 +142,7 @@ namespace GameEngine
 
           public GameBoard GameBoard
           {
-               get => m_GameBoard;
+               get => r_GameBoard;
           }
 
           public GameBoard GetGameBoard()
@@ -259,15 +251,6 @@ namespace GameEngine
                return retValue;
           }
 
-          public void InitializePlayerSkeleton(string i_PlayerName)
-          {
-               Player1 = new Player(false); //fields are initialized to not AI, score - 0
-               Player1.Name = i_PlayerName;
-               isCurrentPlayer1 = true;
-               CurrentPlayer = Player1;
-               CurrentOpponent = Player2;
-          }
-
           public void ForfietRound()
           {
                increaseScoreToPlayer(CurrentOpponent);
@@ -276,7 +259,7 @@ namespace GameEngine
 
           public void NewRound()
           {
-               m_GameBoard.Clear();
+               r_GameBoard.Clear();
           }
      }
 }

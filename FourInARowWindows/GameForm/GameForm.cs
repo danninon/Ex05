@@ -1,13 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameEngine;
 
@@ -18,7 +11,6 @@ namespace FourInARowWindows
           private readonly IFourInARow r_engine;
           private readonly List<ActionButton> r_actionButtons;
           private readonly List<GameButton> r_gameButtons;
-          GameEngineLogic.eGameStatus status;
 
           public GameForm(IFourInARow i_Engine)
           {
@@ -71,7 +63,6 @@ namespace FourInARowWindows
 
           private void OnActionClicked(object sender, EventArgs e)
           {
-
                ActionButton pressedButton = sender as ActionButton;
                string stringToEngine = pressedButton.Text;
                turn(stringToEngine);
@@ -95,17 +86,27 @@ namespace FourInARowWindows
                {
                     gameTie();
                }
+               if(status != GameEngineLogic.eGameStatus.ContinuePlayingRound)
+               {
+                    prepareNewGame();
+
+               }
+          }
+
+          private void prepareNewGame()
+          {
+               foreach(ActionButton button in r_actionButtons)
+               {
+                    button.Enabled = true;
+               }
+               r_engine.NewRound();
+               drawTable();
           }
 
           private void gameTie()
           {
-               if (MessageBox.Show("Tie!!\nAnother Round?", "A Tie!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-               {
-                    r_engine.NewRound();
-                    drawTable();
-               }
-               else
-               {
+               if (MessageBox.Show("Tie!!\nAnother Round?", "A Tie!", MessageBoxButtons.YesNo) == DialogResult.No)
+               { 
                     this.Close();
                }
           }
@@ -115,8 +116,6 @@ namespace FourInARowWindows
                if (MessageBox.Show(r_engine.GetOppositePlayer().Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
                {
                     updatePlayerStampsFromEngine();
-                    r_engine.NewRound();
-                    drawTable();
                }
                else
                {

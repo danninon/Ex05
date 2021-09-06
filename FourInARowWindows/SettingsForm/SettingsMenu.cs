@@ -12,104 +12,93 @@ using GameEngine;
 
 namespace FourInARowWindows
 {
-    public partial class SettingsMenu : Form
-    {
-        private readonly IFourInARow engine;
-
-        private const string k_ComputerOpponentName = "[Computer]";
-        private const string k_ErrorFormTitle = "Error log:";
-
-
-        public SettingsMenu()
-        {
-            //logical configuring - might want to put into separate method
-            engine = new GameEngineLogic();
-            InitializeComponent();
-            testSettings();
-        }
-
-        public SettingsMenu(IFourInARow i_Engine)
-        {
-            engine = i_Engine;
-        }
-
-        private void OnOpponentChanged(object sender, EventArgs e)
-        {
-            CheckBox checkBox = sender as CheckBox;
-            if (checkBox.Checked == true)
-            {
-                textInputPlayer2Name.Clear();
-                textInputPlayer2Name.Enabled = true;
-            }
-            else //is false
-            {
-
-                textInputPlayer2Name.Enabled = false;
-                textInputPlayer2Name.Text = k_ComputerOpponentName;
-            }
-        }
+     public partial class SettingsMenu : Form
+     {
+          private const string k_ComputerTextBoxName = "[Computer]";
+          private const string k_ErrorFormTitle = "Error log:";
+          private const string k_ComputerDisplayName = "Computer";
 
 
-        private void OnStartClicked(object sender, EventArgs e)
-        {
-            //   validateSettingsForm();
-            bool errorAtForm;
-            StringBuilder errorStringForm = new StringBuilder(k_ErrorFormTitle + Environment.NewLine);
+          public SettingsMenu()
+          {
+               //logical configuring - might want to put into separate method
+               InitializeComponent();
+          }
 
-            errorAtForm = validateForm(errorStringForm);
+          private void OnOpponentChanged(object sender, EventArgs e)
+          {
+               CheckBox checkBox = sender as CheckBox;
+               if (checkBox.Checked == true)
+               {
+                    textInputPlayer2Name.Clear();
+                    textInputPlayer2Name.Enabled = true;
+               }
+               else //is false
+               {
 
-            if (errorAtForm == false)
-            {
-
-                engine.InitializePlayerSkeleton(TextInputPlayer1Name.Text);
-                engine.CreateGameBoard(NUDRows.Text, NUDCols.Text);
-                string userOpponentChoice = this.checkBoxPlayerTwo.Checked ? isAiOpponent : isHumanOpponent;
-                engine.InitializePlayer2AndOpponent(userOpponentChoice, textInputPlayer2Name.Text);
-                this.Hide();
-                openGameForm();
-            }
-            else // errorAtForm == true
-            {
-                MessageBox.Show(errorStringForm.ToString());
-            }
-        }
-
-        private bool validateForm(StringBuilder io_SystemOutPutToUserBuilder)
-        {
-            bool errorAtForm = false;
-
-            if (TextInputPlayer1Name.Text == "")
-            {
-                io_SystemOutPutToUserBuilder.Append("Please make sure you chose rows for the game table." + Environment.NewLine);
-                errorAtForm = true;
-            }
-
-            if (textInputPlayer2Name.Text == "")
-            {
-                io_SystemOutPutToUserBuilder.Append("Please make sure you chose rows for the game table." + Environment.NewLine);
-                errorAtForm = true;
-            }
-
-            return errorAtForm;
-        }
+                    textInputPlayer2Name.Enabled = false;
+                    textInputPlayer2Name.Text = k_ComputerTextBoxName;
+               }
+          }
 
 
-        private void openGameForm()
-        {
-            GameForm gameForm = new GameForm(engine);
-            this.Close();
-        }
+          private void OnStartClicked(object sender, EventArgs e)
+          {
+               //   validateSettingsForm();
+               bool errorAtForm;
+               StringBuilder errorStringForm = new StringBuilder(k_ErrorFormTitle + Environment.NewLine);
 
-        private const string isAiOpponent = "1";
-        private const string isHumanOpponent = "2";
+               errorAtForm = validateForm(errorStringForm);
 
- 
+               if (errorAtForm == false)
+               {
+                    IFourInARow engine = new GameEngineLogic(NUDRows.Text, NUDCols.Text);
+                    engine.GetPlayer1().Name = TextInputPlayer1Name.Text;
+                    string userOpponentChoice = this.checkBoxPlayerTwo.Checked ? isAiOpponent : isHumanOpponent;
+                    engine.InitializePlayer2AndOpponent(userOpponentChoice, textInputPlayer2Name.Text);
+                    this.Hide();
+                    openGameForm(engine);
+               }
+               else // errorAtForm == true
+               {
+                    MessageBox.Show(errorStringForm.ToString());
+               }
+          }
 
-        //TODO: DELETE WHEN HANDING THE PROJECT
-        private void testSettings()
-        {
-            TextInputPlayer1Name.Text = "E.g Yusuf";
-        }
-    }
+          private bool validateForm(StringBuilder io_SystemOutPutToUserBuilder)
+          {
+               bool errorAtForm = false;
+
+               if (TextInputPlayer1Name.Text == "")
+               {
+                    io_SystemOutPutToUserBuilder.Append("Please make sure you enter a name for player 1" + Environment.NewLine);
+                    errorAtForm = true;
+               }
+
+               if (textInputPlayer2Name.Text == "")
+               {
+                    io_SystemOutPutToUserBuilder.Append("Please make sure you enter a name for player 2" + Environment.NewLine);
+                    errorAtForm = true;
+               }
+
+               return errorAtForm;
+          }
+
+
+          private void openGameForm(IFourInARow i_engine)
+          {
+               if(i_engine.GetPlayer2().IsAnAi == true)
+               {
+                    i_engine.GetPlayer2().Name = k_ComputerDisplayName;
+               }
+               GameForm gameForm = new GameForm(i_engine);
+               this.Close();
+          }
+
+          private const string isAiOpponent = "1";
+          private const string isHumanOpponent = "2";
+
+
+     }
 
 }
