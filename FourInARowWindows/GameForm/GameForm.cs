@@ -39,8 +39,8 @@ namespace FourInARowWindows
 
                gameTable.RowCount = r_engine.GetGameBoard().NumOfRows + 1;
                gameTable.ColumnCount = r_engine.GetGameBoard().NumOfCols;
-               this.Size = new Size(r_engine.GetNumOfCols()*50, r_engine.GetNumOfRows()*55);
                this.gameTable.Size = new Size(r_engine.GetNumOfCols() * 45, r_engine.GetNumOfRows() * 50);
+               this.Size = new Size(gameTable.Size.Width + 50, gameTable.Size.Height + 90);
 
               foreach (ActionButton button in r_actionButtons)
                {
@@ -64,7 +64,6 @@ namespace FourInARowWindows
           {
                Player player1 = r_engine.GetPlayer1();
                Player player2 = r_engine.GetPlayer2();
-               
 
                label3.Text = player1.Name + ": " + player1.Score;
                label4.Text = player2.Name + ": " + player2.Score;
