@@ -13,6 +13,5 @@ namespace FourInARowWindows
             this.Height = 40;
             this.Width = 40;
           }
-
      }
 }

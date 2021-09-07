@@ -10,16 +10,18 @@ namespace FourInARowWindows
           private const string k_ComputerTextBoxName = "[Computer]";
           private const string k_ErrorFormTitle = "Error log:";
           private const string k_ComputerDisplayName = "Computer";
+          private const string k_IsAiOpponent = "1";
+          private const string k_IsHumanOpponent = "2";
 
           public SettingsMenu()
           {
-               //logical configuring - might want to put into separate method
                InitializeComponent();
           }
 
           private void OnOpponentChanged(object i_Sender, EventArgs e)
           {
                CheckBox checkBox = i_Sender as CheckBox;
+
                if (checkBox.Checked == true)
                {
                     textInputPlayer2Name.Clear();
@@ -35,7 +37,6 @@ namespace FourInARowWindows
           private void OnStartClicked(object i_Sender, EventArgs e)
           {
                StringBuilder errorStringForm = new StringBuilder(k_ErrorFormTitle + Environment.NewLine);
-
                bool errorAtForm = validateForm(errorStringForm);
 
                if (errorAtForm == false)
@@ -75,18 +76,13 @@ namespace FourInARowWindows
 
           private void openGameForm(IFourInARow i_Engine)
           {
-               if(i_Engine.GetPlayer2().IsAnAi == true)
+               if (i_Engine.GetPlayer2().IsAnAi == true)
                {
                     i_Engine.GetPlayer2().Name = k_ComputerDisplayName;
                }
+
                GameForm gameForm = new GameForm(i_Engine);
                this.Close();
           }
-
-          private const string k_IsAiOpponent = "1";
-          private const string k_IsHumanOpponent = "2";
-
-
      }
-
 }

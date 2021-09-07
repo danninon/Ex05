@@ -18,40 +18,40 @@ namespace FourInARowWindows
                r_GameButtons = new List<GameButton>();
                r_Engine = i_Engine;
 
-               for (int i = 0; i < r_Engine.GetGameBoard().NumOfCols; i++)
+               for (int i = 0; i < r_Engine.GetNumOfCols(); i++)
                {
                     r_ActionButtons.Add(new ActionButton(i + 1));
                }
-               for (int j = 0; j < r_Engine.GetGameBoard().NumOfCols * r_Engine.GetGameBoard().NumOfRows; j++)
+               for (int j = 0; j < r_Engine.GetNumOfCols() * r_Engine.GetNumOfRows(); j++)
                {
                     r_GameButtons.Add(new GameButton());
                }
 
                InitializeComponent();
 
-               gameTable.RowCount = r_Engine.GetGameBoard().NumOfRows + 1;
-               gameTable.ColumnCount = r_Engine.GetGameBoard().NumOfCols;
+               gameTable.RowCount = r_Engine.GetNumOfRows() + 1;
+               gameTable.ColumnCount = r_Engine.GetNumOfCols();
                this.gameTable.Size = new Size(r_Engine.GetNumOfCols() * 45, r_Engine.GetNumOfRows() * 50);
                this.Size = new Size(gameTable.Size.Width + 50, gameTable.Size.Height + 90);
 
-              foreach (ActionButton button in r_ActionButtons)
+               foreach (ActionButton button in r_ActionButtons)
                {
-                    
-                button.Click += OnActionClicked;
-                gameTable.Controls.Add(button);
+
+                    button.Click += OnActionClicked;
+                    gameTable.Controls.Add(button);
 
                }
                foreach (GameButton button in r_GameButtons)
                {
                     gameTable.Controls.Add(button);
                     button.Enabled = true;
-                    
+
                }
                updatePlayerStampsFromEngine();
                ShowDialog();
           }
 
-         
+
           private void updatePlayerStampsFromEngine()
           {
                Player player1 = r_Engine.GetPlayer1();
@@ -78,6 +78,7 @@ namespace FourInARowWindows
                GameEngineLogic.eGameStatus status = r_Engine.CommitTurn(i_Input);
                markFinishedColumnsIfExist();
                drawTable();
+
                if (status == GameEngineLogic.eGameStatus.Win)
                {
                     gameWon();
@@ -86,34 +87,34 @@ namespace FourInARowWindows
                {
                     gameTie();
                }
-               if(status != GameEngineLogic.eGameStatus.ContinuePlayingRound)
+               if (status != GameEngineLogic.eGameStatus.ContinuePlayingRound)
                {
                     prepareNewGame();
-
                }
           }
 
           private void prepareNewGame()
           {
-               foreach(ActionButton button in r_ActionButtons)
+               foreach (ActionButton button in r_ActionButtons)
                {
                     button.Enabled = true;
                }
+
                r_Engine.NewRound();
                drawTable();
           }
 
           private void gameTie()
           {
-               if (MessageBox.Show("Tie!!\nAnother Round?", "A Tie!", MessageBoxButtons.YesNo) == DialogResult.No)
-               { 
+               if (MessageBox.Show("Tie!!" + System.Environment.NewLine + "Another Round?", "A Tie!", MessageBoxButtons.YesNo) == DialogResult.No)
+               {
                     this.Close();
                }
           }
 
           private void gameWon()
           {
-               if (MessageBox.Show(r_Engine.GetOppositePlayer().Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+               if (MessageBox.Show(r_Engine.GetOppositePlayer().Name + "Won!!" + System.Environment.NewLine + "Another Round ?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
                {
                     updatePlayerStampsFromEngine();
                }
@@ -123,14 +124,13 @@ namespace FourInARowWindows
                }
           }
 
-          private void markFinishedColumnsIfExist() //TODO: remove GetGameBoard
+          private void markFinishedColumnsIfExist()
           {
-               if (r_Engine.GetGameBoard().GameBoardMatrix[0, r_Engine.GetLastColMove() - 1] !=
+               if (r_Engine.GetMatrixValue(0, r_Engine.GetLastColMove() - 1) !=
                    (byte)GameEngineLogic.ePlayerDisk.NullValue)
                {
                     r_ActionButtons[r_Engine.GetLastColMove() - 1].Enabled = false;
                }
-
           }
 
           private void drawTable()
@@ -142,52 +142,18 @@ namespace FourInARowWindows
                          GameEngineLogic.ePlayerDisk currentDisk = r_Engine.GetMatrixValue(i, j);
                          if (currentDisk == GameEngineLogic.ePlayerDisk.Player1)
                          {
-                              r_GameButtons[i * r_Engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_Player1Figure;
+                              r_GameButtons[i * r_Engine.GetNumOfCols() + j].Text = GameButton.k_Player1Figure;
                          }
                          else if (currentDisk == GameEngineLogic.ePlayerDisk.Player2)
                          {
-                              r_GameButtons[i * r_Engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_Player2Figure;
+                              r_GameButtons[i * r_Engine.GetNumOfCols() + j].Text = GameButton.k_Player2Figure;
                          }
                          else
                          {
-                              r_GameButtons[i * r_Engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_NullFigure;
+                              r_GameButtons[i * r_Engine.GetNumOfCols() + j].Text = GameButton.k_NullFigure;
                          }
                     }
                }
           }
-
-
-
-
-
-
-        // private bool IsContinueRound()
-        // {
-        //     bool isAnotherRound = true;
-        //     Player currentPlayer = r_Engine.GetCurrentPlayer();
-        //     if (status == GameEngineLogic.eGameStatus.Win)
-        //     {
-        //         if (MessageBox.Show(currentPlayer.Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-        //         {
-        //             currentPlayer = 
-        //         }
-        //         else
-        //         {
-        //             this.Close();
-        //         }
-        //     }
-        //     else if (status == GameEngineLogic.eGameStatus.Tie)
-        //     {
-        //
-        //     }
-        //     else
-        //     {
-        //         isAnotherRound = false;
-        //
-        //         this.Close();
-        //     }
-        //     return isAnotherRound;
-        //     }
-
-    }
+     }
 }
