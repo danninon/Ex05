@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace FourInARowWindows
 {
      public class GameButton : Button
      {
-          public const string k_player1Figure = "X";
-          public const string k_player2Figure = "O";
-          public const string k_nullFigure = "";
+          public const string k_Player1Figure = "X";
+          public const string k_Player2Figure = "O";
+          public const string k_NullFigure = "";
         
           public GameButton()
           {

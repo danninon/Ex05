@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using GameEngine;
 
@@ -18,16 +11,15 @@ namespace FourInARowWindows
           private const string k_ErrorFormTitle = "Error log:";
           private const string k_ComputerDisplayName = "Computer";
 
-
           public SettingsMenu()
           {
                //logical configuring - might want to put into separate method
                InitializeComponent();
           }
 
-          private void OnOpponentChanged(object sender, EventArgs e)
+          private void OnOpponentChanged(object i_Sender, EventArgs e)
           {
-               CheckBox checkBox = sender as CheckBox;
+               CheckBox checkBox = i_Sender as CheckBox;
                if (checkBox.Checked == true)
                {
                     textInputPlayer2Name.Clear();
@@ -35,26 +27,22 @@ namespace FourInARowWindows
                }
                else //is false
                {
-
                     textInputPlayer2Name.Enabled = false;
                     textInputPlayer2Name.Text = k_ComputerTextBoxName;
                }
           }
 
-
-          private void OnStartClicked(object sender, EventArgs e)
+          private void OnStartClicked(object i_Sender, EventArgs e)
           {
-               //   validateSettingsForm();
-               bool errorAtForm;
                StringBuilder errorStringForm = new StringBuilder(k_ErrorFormTitle + Environment.NewLine);
 
-               errorAtForm = validateForm(errorStringForm);
+               bool errorAtForm = validateForm(errorStringForm);
 
                if (errorAtForm == false)
                {
                     IFourInARow engine = new GameEngineLogic(NUDRows.Text, NUDCols.Text);
                     engine.GetPlayer1().Name = TextInputPlayer1Name.Text;
-                    string userOpponentChoice = this.checkBoxPlayerTwo.Checked ? isAiOpponent : isHumanOpponent;
+                    string userOpponentChoice = this.checkBoxPlayerTwo.Checked ? k_IsAiOpponent : k_IsHumanOpponent;
                     engine.InitializePlayer2AndOpponent(userOpponentChoice, textInputPlayer2Name.Text);
                     this.Hide();
                     openGameForm(engine);
@@ -85,18 +73,18 @@ namespace FourInARowWindows
           }
 
 
-          private void openGameForm(IFourInARow i_engine)
+          private void openGameForm(IFourInARow i_Engine)
           {
-               if(i_engine.GetPlayer2().IsAnAi == true)
+               if(i_Engine.GetPlayer2().IsAnAi == true)
                {
-                    i_engine.GetPlayer2().Name = k_ComputerDisplayName;
+                    i_Engine.GetPlayer2().Name = k_ComputerDisplayName;
                }
-               GameForm gameForm = new GameForm(i_engine);
+               GameForm gameForm = new GameForm(i_Engine);
                this.Close();
           }
 
-          private const string isAiOpponent = "1";
-          private const string isHumanOpponent = "2";
+          private const string k_IsAiOpponent = "1";
+          private const string k_IsHumanOpponent = "2";
 
 
      }

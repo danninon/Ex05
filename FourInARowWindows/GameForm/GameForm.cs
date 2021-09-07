@@ -8,40 +8,40 @@ namespace FourInARowWindows
 {
      public partial class GameForm : Form
      {
-          private readonly IFourInARow r_engine;
-          private readonly List<ActionButton> r_actionButtons;
-          private readonly List<GameButton> r_gameButtons;
+          private readonly IFourInARow r_Engine;
+          private readonly List<ActionButton> r_ActionButtons;
+          private readonly List<GameButton> r_GameButtons;
 
           public GameForm(IFourInARow i_Engine)
           {
-               r_actionButtons = new List<ActionButton>();
-               r_gameButtons = new List<GameButton>();
-               r_engine = i_Engine;
+               r_ActionButtons = new List<ActionButton>();
+               r_GameButtons = new List<GameButton>();
+               r_Engine = i_Engine;
 
-               for (int i = 0; i < r_engine.GetGameBoard().NumOfCols; i++)
+               for (int i = 0; i < r_Engine.GetGameBoard().NumOfCols; i++)
                {
-                    r_actionButtons.Add(new ActionButton(i + 1));
+                    r_ActionButtons.Add(new ActionButton(i + 1));
                }
-               for (int j = 0; j < r_engine.GetGameBoard().NumOfCols * r_engine.GetGameBoard().NumOfRows; j++)
+               for (int j = 0; j < r_Engine.GetGameBoard().NumOfCols * r_Engine.GetGameBoard().NumOfRows; j++)
                {
-                    r_gameButtons.Add(new GameButton());
+                    r_GameButtons.Add(new GameButton());
                }
 
                InitializeComponent();
 
-               gameTable.RowCount = r_engine.GetGameBoard().NumOfRows + 1;
-               gameTable.ColumnCount = r_engine.GetGameBoard().NumOfCols;
-               this.gameTable.Size = new Size(r_engine.GetNumOfCols() * 45, r_engine.GetNumOfRows() * 50);
+               gameTable.RowCount = r_Engine.GetGameBoard().NumOfRows + 1;
+               gameTable.ColumnCount = r_Engine.GetGameBoard().NumOfCols;
+               this.gameTable.Size = new Size(r_Engine.GetNumOfCols() * 45, r_Engine.GetNumOfRows() * 50);
                this.Size = new Size(gameTable.Size.Width + 50, gameTable.Size.Height + 90);
 
-              foreach (ActionButton button in r_actionButtons)
+              foreach (ActionButton button in r_ActionButtons)
                {
                     
                 button.Click += OnActionClicked;
                 gameTable.Controls.Add(button);
 
                }
-               foreach (GameButton button in r_gameButtons)
+               foreach (GameButton button in r_GameButtons)
                {
                     gameTable.Controls.Add(button);
                     button.Enabled = true;
@@ -54,29 +54,29 @@ namespace FourInARowWindows
          
           private void updatePlayerStampsFromEngine()
           {
-               Player player1 = r_engine.GetPlayer1();
-               Player player2 = r_engine.GetPlayer2();
+               Player player1 = r_Engine.GetPlayer1();
+               Player player2 = r_Engine.GetPlayer2();
 
                label3.Text = player1.Name + ": " + player1.Score;
                label4.Text = player2.Name + ": " + player2.Score;
           }
 
-          private void OnActionClicked(object sender, EventArgs e)
+          private void OnActionClicked(object i_Sender, EventArgs e)
           {
-               ActionButton pressedButton = sender as ActionButton;
+               ActionButton pressedButton = i_Sender as ActionButton;
                string stringToEngine = pressedButton.Text;
                turn(stringToEngine);
-               if (r_engine.GetCurrentPlayer().IsAnAi == true)
+               if (r_Engine.GetCurrentPlayer().IsAnAi == true)
                {
                     stringToEngine = null;
                     turn(stringToEngine);
                }
           }
 
-          private void turn(string i_input)
+          private void turn(string i_Input)
           {
-               GameEngineLogic.eGameStatus status = r_engine.CommitTurn(i_input);
-               MarkFinishedColumnsIfExist();
+               GameEngineLogic.eGameStatus status = r_Engine.CommitTurn(i_Input);
+               markFinishedColumnsIfExist();
                drawTable();
                if (status == GameEngineLogic.eGameStatus.Win)
                {
@@ -95,11 +95,11 @@ namespace FourInARowWindows
 
           private void prepareNewGame()
           {
-               foreach(ActionButton button in r_actionButtons)
+               foreach(ActionButton button in r_ActionButtons)
                {
                     button.Enabled = true;
                }
-               r_engine.NewRound();
+               r_Engine.NewRound();
                drawTable();
           }
 
@@ -113,7 +113,7 @@ namespace FourInARowWindows
 
           private void gameWon()
           {
-               if (MessageBox.Show(r_engine.GetOppositePlayer().Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+               if (MessageBox.Show(r_Engine.GetOppositePlayer().Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
                {
                     updatePlayerStampsFromEngine();
                }
@@ -123,34 +123,34 @@ namespace FourInARowWindows
                }
           }
 
-          private void MarkFinishedColumnsIfExist() //TODO: remove GetGameBoard
+          private void markFinishedColumnsIfExist() //TODO: remove GetGameBoard
           {
-               if (r_engine.GetGameBoard().GameBoardMatrix[0, r_engine.GetLastColMove() - 1] !=
+               if (r_Engine.GetGameBoard().GameBoardMatrix[0, r_Engine.GetLastColMove() - 1] !=
                    (byte)GameEngineLogic.ePlayerDisk.NullValue)
                {
-                    r_actionButtons[r_engine.GetLastColMove() - 1].Enabled = false;
+                    r_ActionButtons[r_Engine.GetLastColMove() - 1].Enabled = false;
                }
 
           }
 
           private void drawTable()
           {
-               for (int i = 0; i < r_engine.GetNumOfRows(); i++)
+               for (int i = 0; i < r_Engine.GetNumOfRows(); i++)
                {
-                    for (int j = 0; j < r_engine.GetNumOfCols(); j++)
+                    for (int j = 0; j < r_Engine.GetNumOfCols(); j++)
                     {
-                         GameEngineLogic.ePlayerDisk currentDisk = r_engine.GetMatrixValue(i, j);
+                         GameEngineLogic.ePlayerDisk currentDisk = r_Engine.GetMatrixValue(i, j);
                          if (currentDisk == GameEngineLogic.ePlayerDisk.Player1)
                          {
-                              r_gameButtons[i * r_engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_player1Figure;
+                              r_GameButtons[i * r_Engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_Player1Figure;
                          }
                          else if (currentDisk == GameEngineLogic.ePlayerDisk.Player2)
                          {
-                              r_gameButtons[i * r_engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_player2Figure;
+                              r_GameButtons[i * r_Engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_Player2Figure;
                          }
                          else
                          {
-                              r_gameButtons[i * r_engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_nullFigure;
+                              r_GameButtons[i * r_Engine.GetGameBoard().NumOfCols + j].Text = GameButton.k_NullFigure;
                          }
                     }
                }
@@ -164,7 +164,7 @@ namespace FourInARowWindows
         // private bool IsContinueRound()
         // {
         //     bool isAnotherRound = true;
-        //     Player currentPlayer = r_engine.GetCurrentPlayer();
+        //     Player currentPlayer = r_Engine.GetCurrentPlayer();
         //     if (status == GameEngineLogic.eGameStatus.Win)
         //     {
         //         if (MessageBox.Show(currentPlayer.Name + "Won!!\nAnother Round?", "A Win!", MessageBoxButtons.YesNo) == DialogResult.Yes)
